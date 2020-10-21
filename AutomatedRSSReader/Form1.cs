@@ -40,11 +40,13 @@ namespace AutomatedRSSReader
         private void podcastNew_Click(object sender, EventArgs e)
         {
             Podcast podcast = new Podcast(urlInput.Text);
-            podcastList.Items.Add(podcast.feed.Title.Text);
+            podcastList.Items.Add(podcast.Title);
+            podcastList.Items.Add(podcast.Description);
         }
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
+
         }
     }
 }

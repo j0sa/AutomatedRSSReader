@@ -29,7 +29,8 @@ namespace AutomatedRSSReader
             Console.WriteLine(feed.Title.Text);
 
             Podcast podcast = new Podcast(link);
-            Console.WriteLine(podcast.feed.Description.Text);
+            //Console.WriteLine(podcast.feed.Title.Text);
+            //Console.WriteLine(podcast.NumberOfEpisodes);
         }
     }
 }
