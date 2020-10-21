@@ -31,21 +31,23 @@
             this.categories = new System.Windows.Forms.ListBox();
             this.podcastList = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.categoryNew = new System.Windows.Forms.Button();
+            this.categorySave = new System.Windows.Forms.Button();
+            this.categoryRemove = new System.Windows.Forms.Button();
             this.categoryNameLabel = new System.Windows.Forms.Label();
             this.categoryLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.urlInput = new System.Windows.Forms.TextBox();
+            this.podcastRemove = new System.Windows.Forms.Button();
+            this.podcastSave = new System.Windows.Forms.Button();
+            this.podcastNew = new System.Windows.Forms.Button();
+            this.categorySelect = new System.Windows.Forms.ComboBox();
+            this.updatefreqSelect = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.podcastTable = new System.Windows.Forms.TableLayoutPanel();
+            this.description = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // categories
@@ -71,32 +73,32 @@
             this.textBox1.Size = new System.Drawing.Size(237, 20);
             this.textBox1.TabIndex = 2;
             // 
-            // button1
+            // categoryNew
             // 
-            this.button1.Location = new System.Drawing.Point(466, 170);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.categoryNew.Location = new System.Drawing.Point(466, 170);
+            this.categoryNew.Name = "categoryNew";
+            this.categoryNew.Size = new System.Drawing.Size(75, 23);
+            this.categoryNew.TabIndex = 3;
+            this.categoryNew.Text = "New";
+            this.categoryNew.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // categorySave
             // 
-            this.button2.Location = new System.Drawing.Point(547, 170);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.categorySave.Location = new System.Drawing.Point(547, 170);
+            this.categorySave.Name = "categorySave";
+            this.categorySave.Size = new System.Drawing.Size(75, 23);
+            this.categorySave.TabIndex = 4;
+            this.categorySave.Text = "Save";
+            this.categorySave.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // categoryRemove
             // 
-            this.button3.Location = new System.Drawing.Point(628, 170);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.categoryRemove.Location = new System.Drawing.Point(628, 170);
+            this.categoryRemove.Name = "categoryRemove";
+            this.categoryRemove.Size = new System.Drawing.Size(75, 23);
+            this.categoryRemove.TabIndex = 5;
+            this.categoryRemove.Text = "Remove";
+            this.categoryRemove.UseVisualStyleBackColor = true;
             // 
             // categoryNameLabel
             // 
@@ -116,55 +118,56 @@
             this.categoryLabel.TabIndex = 7;
             this.categoryLabel.Text = "Categories:";
             // 
-            // textBox2
+            // urlInput
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 144);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(194, 20);
-            this.textBox2.TabIndex = 8;
+            this.urlInput.Location = new System.Drawing.Point(12, 144);
+            this.urlInput.Name = "urlInput";
+            this.urlInput.Size = new System.Drawing.Size(194, 20);
+            this.urlInput.TabIndex = 8;
             // 
-            // button4
+            // podcastRemove
             // 
-            this.button4.Location = new System.Drawing.Point(385, 171);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.podcastRemove.Location = new System.Drawing.Point(385, 171);
+            this.podcastRemove.Name = "podcastRemove";
+            this.podcastRemove.Size = new System.Drawing.Size(75, 23);
+            this.podcastRemove.TabIndex = 9;
+            this.podcastRemove.Text = "Remove";
+            this.podcastRemove.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // podcastSave
             // 
-            this.button5.Location = new System.Drawing.Point(304, 171);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.podcastSave.Location = new System.Drawing.Point(304, 171);
+            this.podcastSave.Name = "podcastSave";
+            this.podcastSave.Size = new System.Drawing.Size(75, 23);
+            this.podcastSave.TabIndex = 10;
+            this.podcastSave.Text = "Save";
+            this.podcastSave.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // podcastNew
             // 
-            this.button6.Location = new System.Drawing.Point(223, 171);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
+            this.podcastNew.Location = new System.Drawing.Point(223, 171);
+            this.podcastNew.Name = "podcastNew";
+            this.podcastNew.Size = new System.Drawing.Size(75, 23);
+            this.podcastNew.TabIndex = 11;
+            this.podcastNew.Text = "New";
+            this.podcastNew.UseVisualStyleBackColor = true;
+            this.podcastNew.Click += new System.EventHandler(this.podcastNew_Click);
             // 
-            // comboBox1
+            // categorySelect
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(339, 144);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 12;
+            this.categorySelect.FormattingEnabled = true;
+            this.categorySelect.Location = new System.Drawing.Point(339, 144);
+            this.categorySelect.Name = "categorySelect";
+            this.categorySelect.Size = new System.Drawing.Size(121, 21);
+            this.categorySelect.TabIndex = 12;
             // 
-            // comboBox2
+            // updatefreqSelect
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(212, 143);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 13;
+            this.updatefreqSelect.FormattingEnabled = true;
+            this.updatefreqSelect.Location = new System.Drawing.Point(212, 143);
+            this.updatefreqSelect.Name = "updatefreqSelect";
+            this.updatefreqSelect.Size = new System.Drawing.Size(121, 21);
+            this.updatefreqSelect.TabIndex = 13;
             // 
             // label1
             // 
@@ -202,24 +205,51 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "Category:";
             // 
+            // podcastTable
+            // 
+            this.podcastTable.ColumnCount = 4;
+            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
+            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.podcastTable.Location = new System.Drawing.Point(12, 12);
+            this.podcastTable.Name = "podcastTable";
+            this.podcastTable.RowCount = 2;
+            this.podcastTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.podcastTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.podcastTable.Size = new System.Drawing.Size(445, 104);
+            this.podcastTable.TabIndex = 18;
+            this.podcastTable.Paint += new System.Windows.Forms.PaintEventHandler(this.podcastTable_Paint);
+            // 
+            // description
+            // 
+            this.description.Cursor = System.Windows.Forms.Cursors.No;
+            this.description.Location = new System.Drawing.Point(466, 199);
+            this.description.Name = "description";
+            this.description.Size = new System.Drawing.Size(237, 93);
+            this.description.TabIndex = 19;
+            this.description.Text = "";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(715, 304);
+            this.Controls.Add(this.description);
+            this.Controls.Add(this.podcastTable);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.updatefreqSelect);
+            this.Controls.Add(this.categorySelect);
+            this.Controls.Add(this.podcastNew);
+            this.Controls.Add(this.podcastSave);
+            this.Controls.Add(this.podcastRemove);
+            this.Controls.Add(this.urlInput);
             this.Controls.Add(this.categoryLabel);
             this.Controls.Add(this.categoryNameLabel);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.categoryRemove);
+            this.Controls.Add(this.categorySave);
+            this.Controls.Add(this.categoryNew);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.podcastList);
             this.Controls.Add(this.categories);
@@ -234,21 +264,23 @@
         private System.Windows.Forms.ListBox categories;
         private System.Windows.Forms.ListBox podcastList;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button categoryNew;
+        private System.Windows.Forms.Button categorySave;
+        private System.Windows.Forms.Button categoryRemove;
         private System.Windows.Forms.Label categoryNameLabel;
         private System.Windows.Forms.Label categoryLabel;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox urlInput;
+        private System.Windows.Forms.Button podcastRemove;
+        private System.Windows.Forms.Button podcastSave;
+        private System.Windows.Forms.Button podcastNew;
+        private System.Windows.Forms.ComboBox categorySelect;
+        private System.Windows.Forms.ComboBox updatefreqSelect;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TableLayoutPanel podcastTable;
+        private System.Windows.Forms.RichTextBox description;
     }
 }
 

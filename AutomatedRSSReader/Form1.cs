@@ -19,12 +19,23 @@ namespace AutomatedRSSReader
             InitializeComponent();
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
+            description.ReadOnly = true;
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-        }
-        
 
+        }
+
+        private void podcastTable_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void podcastNew_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
