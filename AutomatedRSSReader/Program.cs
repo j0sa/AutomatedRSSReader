@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceModel.Syndication;
+using System.Xml;
 
 namespace AutomatedRSSReader
 {
@@ -17,6 +19,13 @@ namespace AutomatedRSSReader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            Console.WriteLine("Insert link");
+            string link = "http://www.svt.se/nyheter/rss.xml";
+
+            XmlReader reader = XmlReader.Create(link);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            Console.WriteLine(feed.Title.Text);
         }
     }
 }
