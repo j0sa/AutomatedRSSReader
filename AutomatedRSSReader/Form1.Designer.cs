@@ -142,6 +142,7 @@
             this.podcastSave.TabIndex = 10;
             this.podcastSave.Text = "Save";
             this.podcastSave.UseVisualStyleBackColor = true;
+            this.podcastSave.Click += new System.EventHandler(this.podcastSave_Click);
             // 
             // podcastNew
             // 

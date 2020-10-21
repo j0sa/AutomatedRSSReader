@@ -27,6 +27,9 @@ namespace AutomatedRSSReader
             XmlReader reader = XmlReader.Create(link);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             Console.WriteLine(feed.Title.Text);
+
+            Podcast podcast = new Podcast(link);
+            Console.WriteLine(podcast.feed.Description.Text);
         }
     }
 }

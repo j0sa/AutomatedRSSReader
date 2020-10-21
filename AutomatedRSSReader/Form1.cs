@@ -14,6 +14,9 @@ namespace AutomatedRSSReader
 {
     public partial class Form1 : Form
     {
+
+        public SyndicationFeed feed;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +38,12 @@ namespace AutomatedRSSReader
         }
 
         private void podcastNew_Click(object sender, EventArgs e)
+        {
+            Podcast podcast = new Podcast(urlInput.Text);
+            podcastList.Items.Add(podcast.feed.Title.Text);
+        }
+
+        private void podcastSave_Click(object sender, EventArgs e)
         {
         }
     }
