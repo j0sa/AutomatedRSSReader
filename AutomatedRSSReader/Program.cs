@@ -14,6 +14,7 @@ namespace AutomatedRSSReader
         [STAThread]
         static void Main()
         {
+            //Test!
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
