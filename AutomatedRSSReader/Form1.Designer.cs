@@ -41,13 +41,14 @@
             this.podcastSave = new System.Windows.Forms.Button();
             this.podcastNew = new System.Windows.Forms.Button();
             this.categorySelect = new System.Windows.Forms.ComboBox();
-            this.updatefreqSelect = new System.Windows.Forms.ComboBox();
             this.podcastListLabel = new System.Windows.Forms.Label();
             this.urlLabel = new System.Windows.Forms.Label();
             this.updateFreqLabel = new System.Windows.Forms.Label();
             this.podcastCategoryLabel = new System.Windows.Forms.Label();
             this.podcastTable = new System.Windows.Forms.TableLayoutPanel();
             this.episodeDescription = new System.Windows.Forms.RichTextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // categories
@@ -120,7 +121,7 @@
             // 
             // urlInput
             // 
-            this.urlInput.Location = new System.Drawing.Point(12, 198);
+            this.urlInput.Location = new System.Drawing.Point(12, 199);
             this.urlInput.Name = "urlInput";
             this.urlInput.Size = new System.Drawing.Size(253, 20);
             this.urlInput.TabIndex = 8;
@@ -161,14 +162,6 @@
             this.categorySelect.Name = "categorySelect";
             this.categorySelect.Size = new System.Drawing.Size(121, 21);
             this.categorySelect.TabIndex = 12;
-            // 
-            // updatefreqSelect
-            // 
-            this.updatefreqSelect.FormattingEnabled = true;
-            this.updatefreqSelect.Location = new System.Drawing.Point(271, 198);
-            this.updatefreqSelect.Name = "updatefreqSelect";
-            this.updatefreqSelect.Size = new System.Drawing.Size(121, 21);
-            this.updatefreqSelect.TabIndex = 13;
             // 
             // podcastListLabel
             // 
@@ -233,16 +226,23 @@
             this.episodeDescription.TabIndex = 19;
             this.episodeDescription.Text = "";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(271, 199);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 20;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.episodeDescription);
             this.Controls.Add(this.podcastTable);
             this.Controls.Add(this.podcastCategoryLabel);
             this.Controls.Add(this.updateFreqLabel);
             this.Controls.Add(this.urlLabel);
             this.Controls.Add(this.podcastListLabel);
-            this.Controls.Add(this.updatefreqSelect);
             this.Controls.Add(this.categorySelect);
             this.Controls.Add(this.podcastNew);
             this.Controls.Add(this.podcastSave);
@@ -258,6 +258,7 @@
             this.Controls.Add(this.categories);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,13 +279,13 @@
         private System.Windows.Forms.Button podcastSave;
         private System.Windows.Forms.Button podcastNew;
         private System.Windows.Forms.ComboBox categorySelect;
-        private System.Windows.Forms.ComboBox updatefreqSelect;
         private System.Windows.Forms.Label podcastListLabel;
         private System.Windows.Forms.Label urlLabel;
         private System.Windows.Forms.Label updateFreqLabel;
         private System.Windows.Forms.Label podcastCategoryLabel;
         private System.Windows.Forms.TableLayoutPanel podcastTable;
         private System.Windows.Forms.RichTextBox episodeDescription;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
