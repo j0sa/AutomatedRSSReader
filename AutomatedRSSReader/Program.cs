@@ -31,6 +31,13 @@ namespace AutomatedRSSReader
             Podcast podcast = new Podcast(link);
             //Console.WriteLine(podcast.feed.Title.Text);
             //Console.WriteLine(podcast.NumberOfEpisodes);
+
+            List<Episode> episodeList = podcast.createListOfEpisodes();
+            foreach (Episode episode in episodeList)
+            {
+                Console.WriteLine(episode.Title);
+                Console.WriteLine(episode.Description);
+            }
         }
     }
 }

@@ -22,9 +22,7 @@ namespace AutomatedRSSReader
             InitializeComponent();
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
-            description.ReadOnly = true;
-
-
+            episodeDescription.ReadOnly = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -40,8 +38,25 @@ namespace AutomatedRSSReader
         private void podcastNew_Click(object sender, EventArgs e)
         {
             Podcast podcast = new Podcast(urlInput.Text);
-            podcastList.Items.Add(podcast.Title);
-            podcastList.Items.Add(podcast.Description);
+            OtherSerializer serializer = new OtherSerializer();
+            serializer.Serialize(podcast);
+
+            List<Episode> episodes = podcast.createListOfEpisodes();
+            try
+            {
+                episodes.Reverse();
+            } catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            
+            foreach (Episode episode in episodes)
+            {
+                int indexNumber = episode.IndexNumber;
+                string title = episode.Title;
+                podcastList.Items.Add($"Episode {indexNumber}: {title}");
+                //podcastList.Items.Add(episode.Description);
+            }
         }
 
         private void podcastSave_Click(object sender, EventArgs e)

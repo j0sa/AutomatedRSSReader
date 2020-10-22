@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedRSSReader", "AutomatedRSSReader\AutomatedRSSReader.csproj", "{1D254D6D-994C-428F-81F6-7AC8A0B89D42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1D254D6D-994C-428F-81F6-7AC8A0B89D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D254D6D-994C-428F-81F6-7AC8A0B89D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D254D6D-994C-428F-81F6-7AC8A0B89D42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,8 @@ using System.Xml.Linq;
 
 namespace AutomatedRSSReader
 {
-    class Podcast
+    [Serializable]
+    public class Podcast
     {
         public string Url { get; set; }
         public int NumberOfEpisodes { get; set; }
@@ -23,31 +24,44 @@ namespace AutomatedRSSReader
             Url = url;
             createTitleAndDescription();
             createListOfEpisodes();
+            NumberOfEpisodes = 0;
+        }
+
+        public Podcast()
+        {
+
         }
 
         protected void createTitleAndDescription()
         {
-            XmlReader reader = XmlReader.Create(Url);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            Title = feed.Title.Text;
-            Description = feed.Description.Text;
+            try
+            {
+                XmlReader reader = XmlReader.Create(Url);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                Title = feed.Title.Text;
+                Description = feed.Description.Text;
+            } catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        protected void createListOfEpisodes()
+        public List<Episode> createListOfEpisodes()
         {
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.IgnoreComments = true;
-            settings.IgnoreWhitespace = true;
-            settings.IgnoreProcessingInstructions = true;
-
             List<Episode> episodeList = new List<Episode>();
-            using (XmlReader episodeReader = XmlReader.Create(Url, settings))
+            XmlReader reader = XmlReader.Create(Url);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            reader.Close();
+
+            foreach (SyndicationItem item in feed.Items)
             {
-                
+                NumberOfEpisodes++;
+                string title = item.Title.Text;
+                string description = item.Summary.Text;
+
+                episodeList.Add(new Episode(title, description, NumberOfEpisodes));
             }
+            return episodeList;
         }
     }
 }
-
-
- 
