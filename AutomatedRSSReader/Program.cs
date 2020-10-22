@@ -28,16 +28,16 @@ namespace AutomatedRSSReader
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             Console.WriteLine(feed.Title.Text);
 
-            Podcast podcast = new Podcast(link);
+            //Podcast podcast = new Podcast(link);
             //Console.WriteLine(podcast.feed.Title.Text);
             //Console.WriteLine(podcast.NumberOfEpisodes);
 
-            List<Episode> episodeList = podcast.createListOfEpisodes();
-            foreach (Episode episode in episodeList)
-            {
-                Console.WriteLine(episode.Title);
-                Console.WriteLine(episode.Description);
-            }
+            //List<Episode> episodeList = podcast.createListOfEpisodes();
+            //foreach (Episode episode in episodeList)
+            //{
+            //    Console.WriteLine(episode.Title);
+            //    Console.WriteLine(episode.Description);
+            //}
         }
     }
 }

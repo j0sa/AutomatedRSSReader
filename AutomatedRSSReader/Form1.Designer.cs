@@ -47,8 +47,8 @@
             this.podcastCategoryLabel = new System.Windows.Forms.Label();
             this.podcastTable = new System.Windows.Forms.TableLayoutPanel();
             this.episodeDescription = new System.Windows.Forms.RichTextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.updateFreqSelect = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).BeginInit();
             this.SuspendLayout();
             // 
             // categories
@@ -226,17 +226,17 @@
             this.episodeDescription.TabIndex = 19;
             this.episodeDescription.Text = "";
             // 
-            // numericUpDown1
+            // updateFreqSelect
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(271, 199);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 20;
+            this.updateFreqSelect.Location = new System.Drawing.Point(271, 199);
+            this.updateFreqSelect.Name = "updateFreqSelect";
+            this.updateFreqSelect.Size = new System.Drawing.Size(120, 20);
+            this.updateFreqSelect.TabIndex = 20;
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(780, 457);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.updateFreqSelect);
             this.Controls.Add(this.episodeDescription);
             this.Controls.Add(this.podcastTable);
             this.Controls.Add(this.podcastCategoryLabel);
@@ -258,7 +258,7 @@
             this.Controls.Add(this.categories);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,7 +285,7 @@
         private System.Windows.Forms.Label podcastCategoryLabel;
         private System.Windows.Forms.TableLayoutPanel podcastTable;
         private System.Windows.Forms.RichTextBox episodeDescription;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown updateFreqSelect;
     }
 }
 

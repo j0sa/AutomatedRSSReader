@@ -36,7 +36,7 @@ namespace AutomatedRSSReader
 
         private void podcastNew_Click(object sender, EventArgs e)
         {
-            Podcast podcast = new Podcast(urlInput.Text);
+            Podcast podcast = new Podcast(urlInput.Text, updateFreqSelect.Value);
             OtherSerializer serializer = new OtherSerializer();
             serializer.Serialize(podcast);
 
@@ -60,7 +60,17 @@ namespace AutomatedRSSReader
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
+            OtherSerializer serializer = new OtherSerializer();
+            Podcast podcast = serializer.Deserialize();
 
+            List<Episode> episodes = podcast.createListOfEpisodes();
+            foreach (Episode episode in episodes)
+            {
+                int indexNumber = episode.IndexNumber;
+                string title = episode.Title;
+                podcastList.Items.Add($"Episode {indexNumber}: {title}");
+                //podcastList.Items.Add(episode.Description);
+            }
         }
     }
 }

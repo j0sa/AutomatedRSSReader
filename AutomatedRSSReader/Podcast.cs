@@ -15,15 +15,16 @@ namespace AutomatedRSSReader
     public class Podcast
     {
         public string Url { get; set; }
+        public decimal UpdateFreq { get; set; }
         public int NumberOfEpisodes { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public Podcast(string url)
+        public Podcast(string url, decimal updateFreq)
         {
             Url = url;
+            UpdateFreq = updateFreq;
             createTitleAndDescription();
-            createListOfEpisodes();
             NumberOfEpisodes = 0;
         }
 
@@ -58,7 +59,6 @@ namespace AutomatedRSSReader
                 NumberOfEpisodes++;
                 string title = item.Title.Text;
                 string description = item.Summary.Text;
-
                 episodeList.Add(new Episode(title, description, NumberOfEpisodes));
             }
             return episodeList;
