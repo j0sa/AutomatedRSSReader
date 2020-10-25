@@ -6,6 +6,7 @@ using System.Security.Policy;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -24,8 +25,8 @@ namespace AutomatedRSSReader
         {
             Url = url;
             UpdateFreq = updateFreq;
-            createTitleAndDescription();
             NumberOfEpisodes = 0;
+            createTitleAndDescription();
         }
 
         public Podcast()
@@ -49,7 +50,7 @@ namespace AutomatedRSSReader
 
         public List<Episode> createListOfEpisodes()
         {
-            List<Episode> episodeList = new List<Episode>();
+            List<Episode> episodes = new List<Episode>();
             XmlReader reader = XmlReader.Create(Url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
@@ -59,9 +60,9 @@ namespace AutomatedRSSReader
                 NumberOfEpisodes++;
                 string title = item.Title.Text;
                 string description = item.Summary.Text;
-                episodeList.Add(new Episode(title, description, NumberOfEpisodes));
+                episodes.Add(new Episode(title, description, NumberOfEpisodes));
             }
-            return episodeList;
+            return episodes;
         }
     }
 }
