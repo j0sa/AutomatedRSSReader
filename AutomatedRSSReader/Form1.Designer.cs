@@ -70,7 +70,7 @@
             this.episodeList.Name = "episodeList";
             this.episodeList.Size = new System.Drawing.Size(507, 186);
             this.episodeList.TabIndex = 1;
-            this.episodeList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.podcastList_MouseClick);
+            this.episodeList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.episodeList_MouseClick);
             // 
             // textBox1
             // 
