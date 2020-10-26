@@ -58,6 +58,8 @@ namespace AutomatedRSSReader
             }
         }
 
+        
+
         private void podcastSave_Click(object sender, EventArgs e)
         {
             OtherSerializer serializer = new OtherSerializer();
@@ -71,6 +73,30 @@ namespace AutomatedRSSReader
                 podcastList.Items.Add($"Episode {indexNumber}: {title}");
                 //podcastList.Items.Add(episode.Description);
             }
+        }
+
+
+
+        // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
+
+        public void updateListViewPodcast()
+        {
+            
+            string fornamn = "Johan";
+            string efternamn = "Birgersson";
+            string frekvens = "5";
+            string kategori = "sport";
+            ListViewItem item = new ListViewItem(fornamn);
+            item.SubItems.Add(efternamn);
+            item.SubItems.Add(frekvens);
+            item.SubItems.Add(kategori);
+
+            listViewPodcast.Items.Add(item);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            updateListViewPodcast();
         }
     }
 }

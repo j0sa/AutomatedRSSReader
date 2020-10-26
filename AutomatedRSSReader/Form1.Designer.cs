@@ -45,9 +45,14 @@
             this.urlLabel = new System.Windows.Forms.Label();
             this.updateFreqLabel = new System.Windows.Forms.Label();
             this.podcastCategoryLabel = new System.Windows.Forms.Label();
-            this.podcastTable = new System.Windows.Forms.TableLayoutPanel();
             this.episodeDescription = new System.Windows.Forms.RichTextBox();
             this.updateFreqSelect = new System.Windows.Forms.NumericUpDown();
+            this.listViewPodcast = new System.Windows.Forms.ListView();
+            this.columnHeaderEpisode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderFrequency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).BeginInit();
             this.SuspendLayout();
             // 
@@ -199,22 +204,6 @@
             this.podcastCategoryLabel.TabIndex = 17;
             this.podcastCategoryLabel.Text = "Category:";
             // 
-            // podcastTable
-            // 
-            this.podcastTable.ColumnCount = 4;
-            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
-            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 89F));
-            this.podcastTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.podcastTable.Location = new System.Drawing.Point(12, 12);
-            this.podcastTable.Name = "podcastTable";
-            this.podcastTable.RowCount = 2;
-            this.podcastTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.podcastTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.podcastTable.Size = new System.Drawing.Size(507, 166);
-            this.podcastTable.TabIndex = 18;
-            this.podcastTable.Paint += new System.Windows.Forms.PaintEventHandler(this.podcastTable_Paint);
-            // 
             // episodeDescription
             // 
             this.episodeDescription.BackColor = System.Drawing.SystemColors.Control;
@@ -233,12 +222,56 @@
             this.updateFreqSelect.Size = new System.Drawing.Size(120, 20);
             this.updateFreqSelect.TabIndex = 20;
             // 
+            // listViewPodcast
+            // 
+            this.listViewPodcast.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderEpisode,
+            this.columnHeaderName,
+            this.columnHeaderFrequency,
+            this.columnHeaderCategory});
+            this.listViewPodcast.FullRowSelect = true;
+            this.listViewPodcast.HideSelection = false;
+            this.listViewPodcast.Location = new System.Drawing.Point(12, 5);
+            this.listViewPodcast.Name = "listViewPodcast";
+            this.listViewPodcast.Size = new System.Drawing.Size(507, 173);
+            this.listViewPodcast.TabIndex = 0;
+            this.listViewPodcast.UseCompatibleStateImageBehavior = false;
+            this.listViewPodcast.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeaderEpisode
+            // 
+            this.columnHeaderEpisode.Text = "Episode";
+            // 
+            // columnHeaderName
+            // 
+            this.columnHeaderName.Text = "Name";
+            // 
+            // columnHeaderFrequency
+            // 
+            this.columnHeaderFrequency.Text = "Frequency";
+            this.columnHeaderFrequency.Width = 63;
+            // 
+            // columnHeaderCategory
+            // 
+            this.columnHeaderCategory.Text = "Category";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(561, 259);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(167, 55);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listViewPodcast);
             this.Controls.Add(this.updateFreqSelect);
             this.Controls.Add(this.episodeDescription);
-            this.Controls.Add(this.podcastTable);
             this.Controls.Add(this.podcastCategoryLabel);
             this.Controls.Add(this.updateFreqLabel);
             this.Controls.Add(this.urlLabel);
@@ -283,9 +316,14 @@
         private System.Windows.Forms.Label urlLabel;
         private System.Windows.Forms.Label updateFreqLabel;
         private System.Windows.Forms.Label podcastCategoryLabel;
-        private System.Windows.Forms.TableLayoutPanel podcastTable;
         private System.Windows.Forms.RichTextBox episodeDescription;
         private System.Windows.Forms.NumericUpDown updateFreqSelect;
+        private System.Windows.Forms.ListView listViewPodcast;
+        private System.Windows.Forms.ColumnHeader columnHeaderEpisode;
+        private System.Windows.Forms.ColumnHeader columnHeaderName;
+        private System.Windows.Forms.ColumnHeader columnHeaderFrequency;
+        private System.Windows.Forms.ColumnHeader columnHeaderCategory;
+        private System.Windows.Forms.Button button1;
     }
 }
 
