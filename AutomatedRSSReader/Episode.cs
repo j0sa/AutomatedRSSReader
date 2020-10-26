@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace AutomatedRSSReader
 {
+    [Serializable]
     public class Episode
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public int IndexNumber { get; set; }
+        public DateTimeOffset UploadDate { get; set; }
 
-        public Episode(string title, string description, int indexNumber)
+        public Episode(string title, string description, DateTimeOffset uploadDate)
         {
             Title = title;
             Description = description;
-            IndexNumber = indexNumber;
+            UploadDate = uploadDate;
+        }
+
+        public Episode()
+        {
+
         }
     }
 }

@@ -20,13 +20,19 @@ namespace AutomatedRSSReader
         public int NumberOfEpisodes { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Category { get; set; }
 
-        public Podcast(string url, decimal updateFreq)
+        public List<Episode> Episodes = new List<Episode>();
+
+        public Podcast(string url, decimal updateFreq, string category)
         {
             Url = url;
             UpdateFreq = updateFreq;
+            Category = category;
             NumberOfEpisodes = 0;
             createTitleAndDescription();
+            createListOfEpisodes();
+            NumberOfEpisodes = this.Episodes.Count;
         }
 
         public Podcast()
@@ -48,21 +54,19 @@ namespace AutomatedRSSReader
             }
         }
 
-        public List<Episode> createListOfEpisodes()
+        protected void createListOfEpisodes()
         {
-            List<Episode> episodes = new List<Episode>();
             XmlReader reader = XmlReader.Create(Url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
 
             foreach (SyndicationItem item in feed.Items)
             {
-                NumberOfEpisodes++;
                 string title = item.Title.Text;
                 string description = item.Summary.Text;
-                episodes.Add(new Episode(title, description, NumberOfEpisodes));
+                DateTimeOffset uploadDate = item.PublishDate;
+                Episodes.Add(new Episode(title, description, uploadDate));
             }
-            return episodes;
         }
     }
 }

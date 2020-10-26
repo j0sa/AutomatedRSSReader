@@ -23,6 +23,7 @@ namespace AutomatedRSSReader
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
+            updateListViewPodcast();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,36 +39,30 @@ namespace AutomatedRSSReader
         {
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
-                Podcast podcast = new Podcast(urlInput.Text, updateFreqSelect.Value);
+                Podcast podcast = new Podcast(urlInput.Text, updateFreqSelect.Value, "asdsadsadsadsa");
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcast);
 
-                List<Episode> episodes = podcast.createListOfEpisodes();
-                episodes.Reverse();
-
-                foreach (Episode episode in episodes)
+                foreach (Episode episode in podcast.Episodes)
                 {
-                    int indexNumber = episode.IndexNumber;
+                    DateTimeOffset uploadDate = episode.UploadDate;
                     string title = episode.Title;
-                    podcastList.Items.Add($"Episode {indexNumber}: {title}");
+                    episodeList.Items.Add($"{uploadDate}: {title}");
                     //podcastList.Items.Add(episode.Description);
                 }
             }
         }
-
-        
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
             OtherSerializer serializer = new OtherSerializer();
             Podcast podcast = serializer.Deserialize();
 
-            List<Episode> episodes = podcast.createListOfEpisodes();
-            foreach (Episode episode in episodes)
+            foreach (Episode episode in podcast.Episodes)
             {
-                int indexNumber = episode.IndexNumber;
+                DateTimeOffset uploadDate = episode.UploadDate;
                 string title = episode.Title;
-                podcastList.Items.Add($"Episode {indexNumber}: {title}");
+                episodeList.Items.Add($"{uploadDate}: {title}");
                 //podcastList.Items.Add(episode.Description);
             }
         }
@@ -79,21 +74,38 @@ namespace AutomatedRSSReader
         public void updateListViewPodcast()
         {
             
-            string fornamn = "Johan";
-            string efternamn = "Birgersson";
-            string frekvens = "5";
-            string kategori = "sport";
-            ListViewItem item = new ListViewItem(fornamn);
-            item.SubItems.Add(efternamn);
-            item.SubItems.Add(frekvens);
-            item.SubItems.Add(kategori);
+            //string fornamn = "Johan";
+            //string efternamn = "Birgersson";
+            //string frekvens = "5";
+            //string kategori = "sport";
+            //ListViewItem item = new ListViewItem(fornamn);
+            //item.SubItems.Add(efternamn);
+            //item.SubItems.Add(frekvens);
+            //item.SubItems.Add(kategori);
 
-            listViewPodcast.Items.Add(item);
+            //listViewPodcast.Items.Add(item);
+
+            OtherSerializer serializer = new OtherSerializer();
+            Podcast podcast = serializer.Deserialize();
+
+            int numberOfEpisodes = podcast.NumberOfEpisodes;
+            string name = podcast.Title;
+            string category = podcast.Category;
+            decimal freq = podcast.UpdateFreq;
+            Console.WriteLine(numberOfEpisodes.ToString(), freq, name, category);
+            ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
+
+            item.SubItems.Add(name);
+            item.SubItems.Add(freq.ToString());
+            item.SubItems.Add(category);
+
+            podcastList.Items.Add(item);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void podcastList_MouseClick(object sender, MouseEventArgs e)
         {
-            updateListViewPodcast();
+            string item = episodeList.SelectedItem.ToString();
+            episodeDescription.Text = item;
         }
     }
 }
