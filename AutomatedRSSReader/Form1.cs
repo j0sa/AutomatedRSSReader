@@ -45,10 +45,7 @@ namespace AutomatedRSSReader
 
                 foreach (Episode episode in podcast.Episodes)
                 {
-                    DateTimeOffset uploadDate = episode.UploadDate;
-                    string title = episode.Title;
-                    episodeList.Items.Add($"{uploadDate}: {title}");
-                    //podcastList.Items.Add(episode.Description);
+                    episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
                 }
             }
         }
@@ -60,10 +57,7 @@ namespace AutomatedRSSReader
 
             foreach (Episode episode in podcast.Episodes)
             {
-                DateTimeOffset uploadDate = episode.UploadDate;
-                string title = episode.Title;
-                episodeList.Items.Add($"{uploadDate}: {title}");
-                //podcastList.Items.Add(episode.Description);
+                episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
             }
         }
 

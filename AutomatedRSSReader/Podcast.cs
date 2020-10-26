@@ -20,6 +20,8 @@ namespace AutomatedRSSReader
         public int NumberOfEpisodes { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Language { get; set; }
+        public string LastUpdatedTime { get; set; }
         public string Category { get; set; }
 
         public List<Episode> Episodes = new List<Episode>();
@@ -48,6 +50,8 @@ namespace AutomatedRSSReader
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
                 Title = feed.Title.Text;
                 Description = feed.Description.Text;
+                Language = feed.Language;
+                LastUpdatedTime = feed.LastUpdatedTime.ToString();
             } catch(Exception e)
             {
                 Console.WriteLine(e.Message);

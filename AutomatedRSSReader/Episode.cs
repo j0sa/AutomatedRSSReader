@@ -11,13 +11,13 @@ namespace AutomatedRSSReader
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTimeOffset UploadDate { get; set; }
+        public string UploadDate { get; set; }
 
         public Episode(string title, string description, DateTimeOffset uploadDate)
         {
             Title = title;
             Description = description;
-            UploadDate = uploadDate;
+            UploadDate = uploadDate.ToString();
         }
 
         public Episode()
