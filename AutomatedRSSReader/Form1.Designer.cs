@@ -239,6 +239,7 @@
             this.podcastList.TabIndex = 0;
             this.podcastList.UseCompatibleStateImageBehavior = false;
             this.podcastList.View = System.Windows.Forms.View.Details;
+            this.podcastList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.podcastList_MouseClick);
             // 
             // columnHeaderEpisode
             // 

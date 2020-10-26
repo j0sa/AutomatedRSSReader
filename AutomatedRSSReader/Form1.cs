@@ -101,14 +101,24 @@ namespace AutomatedRSSReader
 
         private void podcastList_MouseClick(object sender, MouseEventArgs e)
         {
-            string item = episodeList.SelectedItem.ToString();
-            episodeDescription.Text = item;
+            OtherSerializer serializer = new OtherSerializer();
+            Podcast podcast = serializer.Deserialize();
+
+            string item = podcastList.SelectedItems[0].SubItems[1].Text;
+
+            if (item.Contains(podcast.Title))
+            {
+                foreach (Episode episode in podcast.Episodes)
+                {
+                    episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                }
+            }
         }
 
         private void episodeList_MouseClick(object sender, MouseEventArgs e)
         {
-            OtherSerializer otherSerializer = new OtherSerializer();
-            Podcast podcast = otherSerializer.Deserialize();
+            OtherSerializer serializer = new OtherSerializer();
+            Podcast podcast = serializer.Deserialize();
 
             string item = episodeList.SelectedItem.ToString();
 
