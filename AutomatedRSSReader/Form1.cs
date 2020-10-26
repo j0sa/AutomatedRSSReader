@@ -36,25 +36,22 @@ namespace AutomatedRSSReader
 
         private void podcastNew_Click(object sender, EventArgs e)
         {
-            Podcast podcast = new Podcast(urlInput.Text, updateFreqSelect.Value);
-            OtherSerializer serializer = new OtherSerializer();
-            serializer.Serialize(podcast);
+            if (!String.IsNullOrEmpty(urlInput.Text))
+            {
+                Podcast podcast = new Podcast(urlInput.Text, updateFreqSelect.Value);
+                OtherSerializer serializer = new OtherSerializer();
+                serializer.Serialize(podcast);
 
-            List<Episode> episodes = podcast.createListOfEpisodes();
-            try
-            {
+                List<Episode> episodes = podcast.createListOfEpisodes();
                 episodes.Reverse();
-            } catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-            
-            foreach (Episode episode in episodes)
-            {
-                int indexNumber = episode.IndexNumber;
-                string title = episode.Title;
-                podcastList.Items.Add($"Episode {indexNumber}: {title}");
-                //podcastList.Items.Add(episode.Description);
+
+                foreach (Episode episode in episodes)
+                {
+                    int indexNumber = episode.IndexNumber;
+                    string title = episode.Title;
+                    podcastList.Items.Add($"Episode {indexNumber}: {title}");
+                    //podcastList.Items.Add(episode.Description);
+                }
             }
         }
 
