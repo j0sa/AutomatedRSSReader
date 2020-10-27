@@ -38,6 +38,7 @@ namespace AutomatedRSSReader
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
                 podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, "asdsadsadsadsa"));
+                urlInput.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcasts);
                 podcastList.Items.Clear();
@@ -81,8 +82,10 @@ namespace AutomatedRSSReader
 
         private void podcastRemove_Click(object sender, EventArgs e)
         {
+            podcasts.Remove(selectedPodcast);
             OtherSerializer serializer = new OtherSerializer();
-            serializer.DeserializeList();
+            serializer.Serialize(podcasts);
+            DisplayListItems();
         }
 
         protected void CreateListOfPodcasts()
@@ -121,26 +124,12 @@ namespace AutomatedRSSReader
             Console.WriteLine(File.Exists(filePath) ? "Exists" : "Does not exist");
         }
 
-        private void podcastList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string item = podcastList.SelectedItem.ToString();
-
-            foreach (Podcast podcast in podcasts)
-            {
-                if (item.Contains(podcast.Title))
-                {
-                    foreach (Episode episode in podcast.Episodes)
-                    {
-                        selectedPodcast = podcast;
-                        episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
-                    }
-                }
-            }
-        }
-
         private void podcastList_MouseClick(object sender, MouseEventArgs e)
         {
             string item = podcastList.SelectedItem.ToString();
+
+            episodeList.Items.Clear();
+            episodeDescription.Text = "";
 
             foreach (Podcast podcast in podcasts)
             {
