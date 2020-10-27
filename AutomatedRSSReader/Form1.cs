@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel.Syndication;
+using System.IO;
 
 namespace AutomatedRSSReader
 {
@@ -17,13 +18,15 @@ namespace AutomatedRSSReader
 
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
-
+        public Podcast selectedPodcast;
         public Form1()
         {
             InitializeComponent();
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
+            CreateListOfPodcasts();
+            checkIfFileExists();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -101,32 +104,83 @@ namespace AutomatedRSSReader
 
         private void podcastList_MouseClick(object sender, MouseEventArgs e)
         {
-            OtherSerializer serializer = new OtherSerializer();
-            Podcast podcast = serializer.Deserialize();
 
-            string item = podcastList.SelectedItems[0].SubItems[1].Text;
-
-            if (item.Contains(podcast.Title))
-            {
-                foreach (Episode episode in podcast.Episodes)
-                {
-                    episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
-                }
-            }
         }
 
         private void episodeList_MouseClick(object sender, MouseEventArgs e)
         {
-            OtherSerializer serializer = new OtherSerializer();
-            Podcast podcast = serializer.Deserialize();
-
             string item = episodeList.SelectedItem.ToString();
 
-            foreach (Episode episode in podcast.Episodes)
+            foreach (Episode episode in selectedPodcast.Episodes)
             {
                 if (item.Contains(episode.Title))
                 {
                     episodeDescription.Text = episode.Description;
+                }
+            }
+        }
+
+        private void podcastRemove_Click(object sender, EventArgs e)
+        {
+            OtherSerializer serializer = new OtherSerializer();
+            serializer.DeserializeList();
+        }
+
+        protected void CreateListOfPodcasts()
+        {
+            string filePath = @"C:\Users\Admin\source\repos\AutomatedRSSReader\AutomatedRSSReader\bin\Debug\podcastListData.xml";
+
+            if (File.Exists(filePath))
+            {
+                OtherSerializer serializer = new OtherSerializer();
+                List<Podcast> podcastList = serializer.DeserializeList();
+
+                podcasts.AddRange(podcastList);
+
+                DisplayListItems();
+            }
+        }
+
+        protected void DisplayListItems()
+        {
+
+            podcastList.Items.Clear();
+            foreach (Podcast podcast in podcasts)
+            {
+                int numberOfEpisodes = podcast.NumberOfEpisodes;
+                string name = podcast.Title;
+                string category = podcast.Category;
+                decimal freq = podcast.UpdateFreq;
+                ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
+
+                item.SubItems.Add(name);
+                item.SubItems.Add(freq.ToString());
+                item.SubItems.Add(category);
+
+                podcastList.Items.Add(item);
+            }
+        }
+
+        protected void checkIfFileExists()
+        {
+            string filePath = @"C:\Users\Admin\source\repos\AutomatedRSSReader\AutomatedRSSReader\bin\Debug\podcastListData.xml";
+
+            Console.WriteLine(File.Exists(filePath) ? "Exists" : "Does not exist");
+        }
+
+        private void podcastList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string item = podcastList.SelectedItems[0].SubItems[1].Text;
+
+            foreach (Podcast podcast in podcasts)
+            {
+                if (item.Contains(podcast.Title))
+                {
+                    foreach (Episode episode in podcast.Episodes)
+                    {
+                        selectedPodcast = podcast;
+                        episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                    }
                 }
             }
         }

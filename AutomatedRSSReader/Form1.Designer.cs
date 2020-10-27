@@ -139,6 +139,7 @@
             this.podcastRemove.TabIndex = 9;
             this.podcastRemove.Text = "Remove";
             this.podcastRemove.UseVisualStyleBackColor = true;
+            this.podcastRemove.Click += new System.EventHandler(this.podcastRemove_Click);
             // 
             // podcastSave
             // 
@@ -239,7 +240,7 @@
             this.podcastList.TabIndex = 0;
             this.podcastList.UseCompatibleStateImageBehavior = false;
             this.podcastList.View = System.Windows.Forms.View.Details;
-            this.podcastList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.podcastList_MouseClick);
+            this.podcastList.SelectedIndexChanged += new System.EventHandler(this.podcastList_SelectedIndexChanged);
             // 
             // columnHeaderEpisode
             // 
