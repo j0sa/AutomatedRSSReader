@@ -47,11 +47,7 @@
             this.podcastCategoryLabel = new System.Windows.Forms.Label();
             this.episodeDescription = new System.Windows.Forms.RichTextBox();
             this.updateFreqSelect = new System.Windows.Forms.NumericUpDown();
-            this.podcastList = new System.Windows.Forms.ListView();
-            this.columnHeaderEpisode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderFrequency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.podcastList = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).BeginInit();
             this.SuspendLayout();
             // 
@@ -225,42 +221,12 @@
             // 
             // podcastList
             // 
-            this.podcastList.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.podcastList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderEpisode,
-            this.columnHeaderName,
-            this.columnHeaderFrequency,
-            this.columnHeaderCategory});
-            this.podcastList.FullRowSelect = true;
-            this.podcastList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.podcastList.HideSelection = false;
-            this.podcastList.Location = new System.Drawing.Point(12, 21);
+            this.podcastList.FormattingEnabled = true;
+            this.podcastList.Location = new System.Drawing.Point(12, 12);
             this.podcastList.Name = "podcastList";
-            this.podcastList.Size = new System.Drawing.Size(507, 157);
-            this.podcastList.TabIndex = 0;
-            this.podcastList.UseCompatibleStateImageBehavior = false;
-            this.podcastList.View = System.Windows.Forms.View.Details;
-            this.podcastList.SelectedIndexChanged += new System.EventHandler(this.podcastList_SelectedIndexChanged);
-            // 
-            // columnHeaderEpisode
-            // 
-            this.columnHeaderEpisode.Text = "Episodes";
-            this.columnHeaderEpisode.Width = 55;
-            // 
-            // columnHeaderName
-            // 
-            this.columnHeaderName.Text = "Name";
-            this.columnHeaderName.Width = 250;
-            // 
-            // columnHeaderFrequency
-            // 
-            this.columnHeaderFrequency.Text = "Update Frequency";
-            this.columnHeaderFrequency.Width = 100;
-            // 
-            // columnHeaderCategory
-            // 
-            this.columnHeaderCategory.Text = "Category";
-            this.columnHeaderCategory.Width = 90;
+            this.podcastList.Size = new System.Drawing.Size(507, 160);
+            this.podcastList.TabIndex = 21;
+            this.podcastList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.podcastList_MouseClick);
             // 
             // Form1
             // 
@@ -314,11 +280,7 @@
         private System.Windows.Forms.Label podcastCategoryLabel;
         private System.Windows.Forms.RichTextBox episodeDescription;
         private System.Windows.Forms.NumericUpDown updateFreqSelect;
-        private System.Windows.Forms.ListView podcastList;
-        private System.Windows.Forms.ColumnHeader columnHeaderEpisode;
-        private System.Windows.Forms.ColumnHeader columnHeaderName;
-        private System.Windows.Forms.ColumnHeader columnHeaderFrequency;
-        private System.Windows.Forms.ColumnHeader columnHeaderCategory;
+        private System.Windows.Forms.ListBox podcastList;
     }
 }
 

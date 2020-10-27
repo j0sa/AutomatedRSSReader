@@ -47,13 +47,8 @@ namespace AutomatedRSSReader
                     string name = podcast.Title;
                     string category = podcast.Category;
                     decimal freq = podcast.UpdateFreq;
-                    ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
 
-                    item.SubItems.Add(name);
-                    item.SubItems.Add(freq.ToString());
-                    item.SubItems.Add(category);
-
-                    podcastList.Items.Add(item);
+                    podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                 }
             }
         }
@@ -70,42 +65,6 @@ namespace AutomatedRSSReader
         }
 
         // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
-
-        public void updateListViewPodcast()
-        {
-            
-            //string fornamn = "Johan";
-            //string efternamn = "Birgersson";
-            //string frekvens = "5";
-            //string kategori = "sport";
-            //ListViewItem item = new ListViewItem(fornamn);
-            //item.SubItems.Add(efternamn);
-            //item.SubItems.Add(frekvens);
-            //item.SubItems.Add(kategori);
-
-            //listViewPodcast.Items.Add(item);
-
-            OtherSerializer serializer = new OtherSerializer();
-            Podcast podcast = serializer.Deserialize();
-
-            int numberOfEpisodes = podcast.NumberOfEpisodes;
-            string name = podcast.Title;
-            string category = podcast.Category;
-            decimal freq = podcast.UpdateFreq;
-            Console.WriteLine(numberOfEpisodes.ToString(), freq, name, category);
-            ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
-
-            item.SubItems.Add(name);
-            item.SubItems.Add(freq.ToString());
-            item.SubItems.Add(category);
-
-            podcastList.Items.Add(item);
-        }
-
-        private void podcastList_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
 
         private void episodeList_MouseClick(object sender, MouseEventArgs e)
         {
@@ -143,7 +102,6 @@ namespace AutomatedRSSReader
 
         protected void DisplayListItems()
         {
-
             podcastList.Items.Clear();
             foreach (Podcast podcast in podcasts)
             {
@@ -151,13 +109,8 @@ namespace AutomatedRSSReader
                 string name = podcast.Title;
                 string category = podcast.Category;
                 decimal freq = podcast.UpdateFreq;
-                ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
 
-                item.SubItems.Add(name);
-                item.SubItems.Add(freq.ToString());
-                item.SubItems.Add(category);
-
-                podcastList.Items.Add(item);
+                podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
             }
         }
 
@@ -170,7 +123,7 @@ namespace AutomatedRSSReader
 
         private void podcastList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string item = podcastList.SelectedItems[0].SubItems[1].Text;
+            string item = podcastList.SelectedItem.ToString();
 
             foreach (Podcast podcast in podcasts)
             {
@@ -179,6 +132,23 @@ namespace AutomatedRSSReader
                     foreach (Episode episode in podcast.Episodes)
                     {
                         selectedPodcast = podcast;
+                        episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                    }
+                }
+            }
+        }
+
+        private void podcastList_MouseClick(object sender, MouseEventArgs e)
+        {
+            string item = podcastList.SelectedItem.ToString();
+
+            foreach (Podcast podcast in podcasts)
+            {
+                if (item.Contains(podcast.Title))
+                {
+                    selectedPodcast = podcast;
+                    foreach (Episode episode in podcast.Episodes)
+                    {
                         episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
                     }
                 }
