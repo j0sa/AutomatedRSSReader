@@ -53,19 +53,12 @@ namespace AutomatedRSSReader
 
                     podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                 }
-                DisplayListItems();
             }
+            DisplayListItems();
         }
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
-            OtherSerializer serializer = new OtherSerializer();
-            Podcast podcast = serializer.Deserialize();
-
-            foreach (Episode episode in podcast.Episodes)
-            {
-                episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
-            }
         }
 
         // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
@@ -96,9 +89,10 @@ namespace AutomatedRSSReader
 
         protected void CreateListOfPodcasts()
         {
-            string filePath = @"C:\Users\Admin\source\repos\AutomatedRSSReader\AutomatedRSSReader\bin\Debug\podcastListData.xml";
+            string currentDir = Directory.GetCurrentDirectory();
+            string filePath = @"\podcastListData.xml";
 
-            if (File.Exists(filePath))
+            if (File.Exists(currentDir + filePath))
             {
                 OtherSerializer serializer = new OtherSerializer();
                 List<Podcast> podcastList = serializer.DeserializeList();
