@@ -19,6 +19,7 @@ namespace AutomatedRSSReader
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
+        public List<string> categoryList = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace AutomatedRSSReader
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
-            checkIfFileExists();
+            DisplayListItems();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +38,9 @@ namespace AutomatedRSSReader
         {
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
-                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, "asdsadsadsadsa"));
+                string selectedCategory = categorySelect.Text;
+                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, selectedCategory));
+                urlInput.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcasts);
                 podcastList.Items.Clear();
@@ -47,14 +50,10 @@ namespace AutomatedRSSReader
                     string name = podcast.Title;
                     string category = podcast.Category;
                     decimal freq = podcast.UpdateFreq;
-                    ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
 
-                    item.SubItems.Add(name);
-                    item.SubItems.Add(freq.ToString());
-                    item.SubItems.Add(category);
-
-                    podcastList.Items.Add(item);
+                    podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                 }
+                DisplayListItems();
             }
         }
 
@@ -71,59 +70,28 @@ namespace AutomatedRSSReader
 
         // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
 
-        public void updateListViewPodcast()
-        {
-            
-            //string fornamn = "Johan";
-            //string efternamn = "Birgersson";
-            //string frekvens = "5";
-            //string kategori = "sport";
-            //ListViewItem item = new ListViewItem(fornamn);
-            //item.SubItems.Add(efternamn);
-            //item.SubItems.Add(frekvens);
-            //item.SubItems.Add(kategori);
-
-            //listViewPodcast.Items.Add(item);
-
-            OtherSerializer serializer = new OtherSerializer();
-            Podcast podcast = serializer.Deserialize();
-
-            int numberOfEpisodes = podcast.NumberOfEpisodes;
-            string name = podcast.Title;
-            string category = podcast.Category;
-            decimal freq = podcast.UpdateFreq;
-            Console.WriteLine(numberOfEpisodes.ToString(), freq, name, category);
-            ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
-
-            item.SubItems.Add(name);
-            item.SubItems.Add(freq.ToString());
-            item.SubItems.Add(category);
-
-            podcastList.Items.Add(item);
-        }
-
-        private void podcastList_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void episodeList_MouseClick(object sender, MouseEventArgs e)
         {
-            string item = episodeList.SelectedItem.ToString();
-
-            foreach (Episode episode in selectedPodcast.Episodes)
+            if (episodeList.SelectedItem != null)
             {
-                if (item.Contains(episode.Title))
+                string item = episodeList.SelectedItem.ToString();
+
+                foreach (Episode episode in selectedPodcast.Episodes)
                 {
-                    episodeDescription.Text = episode.Description;
+                    if (item.Contains(episode.Title))
+                    {
+                        episodeDescription.Text = episode.Description;
+                    }
                 }
             }
         }
 
         private void podcastRemove_Click(object sender, EventArgs e)
         {
+            podcasts.Remove(selectedPodcast);
             OtherSerializer serializer = new OtherSerializer();
-            serializer.DeserializeList();
+            serializer.Serialize(podcasts);
+            DisplayListItems();
         }
 
         protected void CreateListOfPodcasts()
@@ -138,12 +106,16 @@ namespace AutomatedRSSReader
                 podcasts.AddRange(podcastList);
 
                 DisplayListItems();
+
+                foreach (Podcast podcast in podcasts)
+                {
+                    categoryList.Add(podcast.Category);
+                }
             }
         }
 
         protected void DisplayListItems()
         {
-
             podcastList.Items.Clear();
             foreach (Podcast podcast in podcasts)
             {
@@ -151,38 +123,46 @@ namespace AutomatedRSSReader
                 string name = podcast.Title;
                 string category = podcast.Category;
                 decimal freq = podcast.UpdateFreq;
-                ListViewItem item = new ListViewItem(numberOfEpisodes.ToString());
 
-                item.SubItems.Add(name);
-                item.SubItems.Add(freq.ToString());
-                item.SubItems.Add(category);
-
-                podcastList.Items.Add(item);
+                podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
+            }
+            categories.Items.Clear();
+            categorySelect.Items.Clear();
+            foreach (string category in categoryList)
+            {
+                categories.Items.Add(category);
+                categorySelect.Items.Add(category);
             }
         }
 
-        protected void checkIfFileExists()
+        private void podcastList_MouseClick(object sender, MouseEventArgs e)
         {
-            string filePath = @"C:\Users\Admin\source\repos\AutomatedRSSReader\AutomatedRSSReader\bin\Debug\podcastListData.xml";
-
-            Console.WriteLine(File.Exists(filePath) ? "Exists" : "Does not exist");
-        }
-
-        private void podcastList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string item = podcastList.SelectedItems[0].SubItems[1].Text;
-
-            foreach (Podcast podcast in podcasts)
+            if (podcastList.SelectedItem != null)
             {
-                if (item.Contains(podcast.Title))
+                string item = podcastList.SelectedItem.ToString();
+
+                episodeList.Items.Clear();
+                episodeDescription.Text = "";
+
+                foreach (Podcast podcast in podcasts)
                 {
-                    foreach (Episode episode in podcast.Episodes)
+                    if (item.Contains(podcast.Title))
                     {
                         selectedPodcast = podcast;
-                        episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                        foreach (Episode episode in podcast.Episodes)
+                        {
+                            episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                        }
                     }
                 }
             }
+        }
+
+        private void categoryNew_Click(object sender, EventArgs e)
+        {
+            string category = categoryInput.Text;
+            categoryList.Add(category);
+            DisplayListItems();
         }
     }
 }
