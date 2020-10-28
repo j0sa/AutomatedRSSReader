@@ -27,7 +27,6 @@ namespace AutomatedRSSReader
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
-            checkIfFileExists();
             DisplayListItems();
         }
 
@@ -73,13 +72,16 @@ namespace AutomatedRSSReader
 
         private void episodeList_MouseClick(object sender, MouseEventArgs e)
         {
-            string item = episodeList.SelectedItem.ToString();
-
-            foreach (Episode episode in selectedPodcast.Episodes)
+            if (episodeList.SelectedItem != null)
             {
-                if (item.Contains(episode.Title))
+                string item = episodeList.SelectedItem.ToString();
+
+                foreach (Episode episode in selectedPodcast.Episodes)
                 {
-                    episodeDescription.Text = episode.Description;
+                    if (item.Contains(episode.Title))
+                    {
+                        episodeDescription.Text = episode.Description;
+                    }
                 }
             }
         }
@@ -133,28 +135,24 @@ namespace AutomatedRSSReader
             }
         }
 
-        protected void checkIfFileExists()
-        {
-            string filePath = @"C:\Users\Admin\source\repos\AutomatedRSSReader\AutomatedRSSReader\bin\Debug\podcastListData.xml";
-
-            Console.WriteLine(File.Exists(filePath) ? "Exists" : "Does not exist");
-        }
-
         private void podcastList_MouseClick(object sender, MouseEventArgs e)
         {
-            string item = podcastList.SelectedItem.ToString();
-
-            episodeList.Items.Clear();
-            episodeDescription.Text = "";
-
-            foreach (Podcast podcast in podcasts)
+            if (podcastList.SelectedItem != null)
             {
-                if (item.Contains(podcast.Title))
+                string item = podcastList.SelectedItem.ToString();
+
+                episodeList.Items.Clear();
+                episodeDescription.Text = "";
+
+                foreach (Podcast podcast in podcasts)
                 {
-                    selectedPodcast = podcast;
-                    foreach (Episode episode in podcast.Episodes)
+                    if (item.Contains(podcast.Title))
                     {
-                        episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                        selectedPodcast = podcast;
+                        foreach (Episode episode in podcast.Episodes)
+                        {
+                            episodeList.Items.Add($"{episode.UploadDate}: {episode.Title}");
+                        }
                     }
                 }
             }
