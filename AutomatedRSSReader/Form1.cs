@@ -19,6 +19,7 @@ namespace AutomatedRSSReader
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
+        public List<string> categoryList = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace AutomatedRSSReader
             episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
             checkIfFileExists();
+            DisplayListItems();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace AutomatedRSSReader
         {
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
-                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, "asdsadsadsadsa"));
+                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, "asdasdasdasd"));
                 urlInput.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcasts);
@@ -51,6 +53,7 @@ namespace AutomatedRSSReader
 
                     podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                 }
+                DisplayListItems();
             }
         }
 
@@ -100,6 +103,11 @@ namespace AutomatedRSSReader
                 podcasts.AddRange(podcastList);
 
                 DisplayListItems();
+
+                foreach (Podcast podcast in podcasts)
+                {
+                    categoryList.Add(podcast.Category);
+                }
             }
         }
 
@@ -114,6 +122,11 @@ namespace AutomatedRSSReader
                 decimal freq = podcast.UpdateFreq;
 
                 podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
+            }
+            categories.Items.Clear();
+            foreach (string category in categoryList)
+            {
+                categories.Items.Add(category);
             }
         }
 
@@ -142,6 +155,13 @@ namespace AutomatedRSSReader
                     }
                 }
             }
+        }
+
+        private void categoryNew_Click(object sender, EventArgs e)
+        {
+            string category = categoryInput.Text;
+            categoryList.Add(category);
+            DisplayListItems();
         }
     }
 }

@@ -30,7 +30,7 @@
         {
             this.categories = new System.Windows.Forms.ListBox();
             this.episodeList = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.categoryInput = new System.Windows.Forms.TextBox();
             this.categoryNew = new System.Windows.Forms.Button();
             this.categorySave = new System.Windows.Forms.Button();
             this.categoryRemove = new System.Windows.Forms.Button();
@@ -68,12 +68,12 @@
             this.episodeList.TabIndex = 1;
             this.episodeList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.episodeList_MouseClick);
             // 
-            // textBox1
+            // categoryInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(531, 143);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(237, 20);
-            this.textBox1.TabIndex = 2;
+            this.categoryInput.Location = new System.Drawing.Point(531, 143);
+            this.categoryInput.Name = "categoryInput";
+            this.categoryInput.Size = new System.Drawing.Size(237, 20);
+            this.categoryInput.TabIndex = 2;
             // 
             // categoryNew
             // 
@@ -83,6 +83,7 @@
             this.categoryNew.TabIndex = 3;
             this.categoryNew.Text = "New";
             this.categoryNew.UseVisualStyleBackColor = true;
+            this.categoryNew.Click += new System.EventHandler(this.categoryNew_Click);
             // 
             // categorySave
             // 
@@ -248,7 +249,7 @@
             this.Controls.Add(this.categoryRemove);
             this.Controls.Add(this.categorySave);
             this.Controls.Add(this.categoryNew);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.categoryInput);
             this.Controls.Add(this.episodeList);
             this.Controls.Add(this.categories);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -263,7 +264,7 @@
 
         private System.Windows.Forms.ListBox categories;
         private System.Windows.Forms.ListBox episodeList;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox categoryInput;
         private System.Windows.Forms.Button categoryNew;
         private System.Windows.Forms.Button categorySave;
         private System.Windows.Forms.Button categoryRemove;
