@@ -48,6 +48,8 @@
             this.episodeDescription = new System.Windows.Forms.RichTextBox();
             this.updateFreqSelect = new System.Windows.Forms.NumericUpDown();
             this.podcastList = new System.Windows.Forms.ListBox();
+            this.podcastName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,9 +126,9 @@
             // 
             // urlInput
             // 
-            this.urlInput.Location = new System.Drawing.Point(12, 199);
+            this.urlInput.Location = new System.Drawing.Point(15, 200);
             this.urlInput.Name = "urlInput";
-            this.urlInput.Size = new System.Drawing.Size(253, 20);
+            this.urlInput.Size = new System.Drawing.Size(184, 20);
             this.urlInput.TabIndex = 8;
             // 
             // podcastRemove
@@ -162,9 +164,9 @@
             // categorySelect
             // 
             this.categorySelect.FormattingEnabled = true;
-            this.categorySelect.Location = new System.Drawing.Point(398, 198);
+            this.categorySelect.Location = new System.Drawing.Point(404, 200);
             this.categorySelect.Name = "categorySelect";
-            this.categorySelect.Size = new System.Drawing.Size(121, 21);
+            this.categorySelect.Size = new System.Drawing.Size(115, 21);
             this.categorySelect.TabIndex = 12;
             // 
             // podcastListLabel
@@ -188,16 +190,16 @@
             // updateFreqLabel
             // 
             this.updateFreqLabel.AutoSize = true;
-            this.updateFreqLabel.Location = new System.Drawing.Point(271, 182);
+            this.updateFreqLabel.Location = new System.Drawing.Point(326, 181);
             this.updateFreqLabel.Name = "updateFreqLabel";
-            this.updateFreqLabel.Size = new System.Drawing.Size(92, 13);
+            this.updateFreqLabel.Size = new System.Drawing.Size(63, 13);
             this.updateFreqLabel.TabIndex = 16;
-            this.updateFreqLabel.Text = "Updatefrequency:";
+            this.updateFreqLabel.Text = "Updatefreq:";
             // 
             // podcastCategoryLabel
             // 
             this.podcastCategoryLabel.AutoSize = true;
-            this.podcastCategoryLabel.Location = new System.Drawing.Point(395, 182);
+            this.podcastCategoryLabel.Location = new System.Drawing.Point(401, 181);
             this.podcastCategoryLabel.Name = "podcastCategoryLabel";
             this.podcastCategoryLabel.Size = new System.Drawing.Size(52, 13);
             this.podcastCategoryLabel.TabIndex = 17;
@@ -216,9 +218,9 @@
             // 
             // updateFreqSelect
             // 
-            this.updateFreqSelect.Location = new System.Drawing.Point(271, 199);
+            this.updateFreqSelect.Location = new System.Drawing.Point(329, 201);
             this.updateFreqSelect.Name = "updateFreqSelect";
-            this.updateFreqSelect.Size = new System.Drawing.Size(120, 20);
+            this.updateFreqSelect.Size = new System.Drawing.Size(49, 20);
             this.updateFreqSelect.TabIndex = 20;
             // 
             // podcastList
@@ -230,9 +232,27 @@
             this.podcastList.TabIndex = 21;
             this.podcastList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.podcastList_MouseClick);
             // 
+            // podcastName
+            // 
+            this.podcastName.Location = new System.Drawing.Point(205, 200);
+            this.podcastName.Name = "podcastName";
+            this.podcastName.Size = new System.Drawing.Size(118, 20);
+            this.podcastName.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(202, 181);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Name:";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.podcastName);
             this.Controls.Add(this.podcastList);
             this.Controls.Add(this.updateFreqSelect);
             this.Controls.Add(this.episodeDescription);
@@ -283,6 +303,8 @@
         private System.Windows.Forms.RichTextBox episodeDescription;
         private System.Windows.Forms.NumericUpDown updateFreqSelect;
         private System.Windows.Forms.ListBox podcastList;
+        private System.Windows.Forms.TextBox podcastName;
+        private System.Windows.Forms.Label label1;
     }
 }
 

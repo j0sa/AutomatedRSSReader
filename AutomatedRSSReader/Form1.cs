@@ -40,7 +40,7 @@ namespace AutomatedRSSReader
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
                 string selectedCategory = categorySelect.Text;
-                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, selectedCategory));
+                podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, updateFreqSelect.Value, selectedCategory));
                 urlInput.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcasts);
@@ -48,7 +48,7 @@ namespace AutomatedRSSReader
                 foreach (Podcast podcast in podcasts)
                 {
                     int numberOfEpisodes = podcast.NumberOfEpisodes;
-                    string name = podcast.Title;
+                    string name = podcast.Name;
                     string category = podcast.Category;
                     decimal freq = podcast.UpdateFreq;
 
@@ -169,6 +169,7 @@ namespace AutomatedRSSReader
 
         private void categoryRemove_Click(object sender, EventArgs e)
         {
+            //LINQ
             string selectedCat = categories.SelectedItem.ToString();
             podcasts.RemoveAll(x => x.Category == selectedCat);
 

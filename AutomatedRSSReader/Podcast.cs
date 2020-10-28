@@ -23,15 +23,17 @@ namespace AutomatedRSSReader
         public string Language { get; set; }
         public string LastUpdatedTime { get; set; }
         public string Category { get; set; }
+        public string Name { get; set; }
 
         public List<Episode> Episodes = new List<Episode>();
 
-        public Podcast(string url, decimal updateFreq, string category)
+        public Podcast(string url, string name, decimal updateFreq, string category)
         {
             Url = url;
             UpdateFreq = updateFreq;
             Category = category;
             NumberOfEpisodes = 0;
+            Name = name;
             createTitleAndDescription();
             createListOfEpisodes();
             NumberOfEpisodes = this.Episodes.Count;
@@ -58,7 +60,7 @@ namespace AutomatedRSSReader
             }
         }
 
-        protected void createListOfEpisodes()
+        public void createListOfEpisodes()
         {
             XmlReader reader = XmlReader.Create(Url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
