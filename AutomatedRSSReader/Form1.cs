@@ -39,7 +39,8 @@ namespace AutomatedRSSReader
         {
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
-                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, "asdasdasdasd"));
+                string selectedCategory = categorySelect.Text;
+                podcasts.Add(new Podcast(urlInput.Text, updateFreqSelect.Value, selectedCategory));
                 urlInput.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcasts);
@@ -124,9 +125,11 @@ namespace AutomatedRSSReader
                 podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
             }
             categories.Items.Clear();
+            categorySelect.Items.Clear();
             foreach (string category in categoryList)
             {
                 categories.Items.Add(category);
+                categorySelect.Items.Add(category);
             }
         }
 
