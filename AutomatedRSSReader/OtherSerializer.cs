@@ -10,6 +10,14 @@ namespace AutomatedRSSReader
 {
     class OtherSerializer
     {
+        public void Serialize(Podcast podcast)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(podcast.GetType());
+            using (FileStream outFile = new FileStream("PodcastData.xml", FileMode.Create, FileAccess.Write))
+            {
+                xmlSerializer.Serialize(outFile, podcast);
+            }
+        }
         public void Serialize(List<Podcast> podcastList)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(podcastList.GetType());

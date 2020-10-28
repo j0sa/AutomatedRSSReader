@@ -42,6 +42,7 @@ namespace AutomatedRSSReader
                 string selectedCategory = categorySelect.Text;
                 podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, updateFreqSelect.Value, selectedCategory));
                 urlInput.Text = "";
+                podcastName.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
                 serializer.Serialize(podcasts);
                 podcastList.Items.Clear();
@@ -116,7 +117,7 @@ namespace AutomatedRSSReader
             foreach (Podcast podcast in podcasts)
             {
                 int numberOfEpisodes = podcast.NumberOfEpisodes;
-                string name = podcast.Title;
+                string name = podcast.Name;
                 string category = podcast.Category;
                 decimal freq = podcast.UpdateFreq;
 
@@ -148,7 +149,7 @@ namespace AutomatedRSSReader
 
                 foreach (Podcast podcast in podcasts)
                 {
-                    if (item.Contains(podcast.Title))
+                    if (item.Contains(podcast.Name))
                     {
                         selectedPodcast = podcast;
                         foreach (Episode episode in podcast.Episodes)
