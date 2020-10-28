@@ -59,6 +59,7 @@ namespace AutomatedRSSReader
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
+
         }
 
         // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
@@ -122,7 +123,9 @@ namespace AutomatedRSSReader
             }
             categories.Items.Clear();
             categorySelect.Items.Clear();
-            foreach (string category in categoryList)
+
+            var noDupes = new HashSet<string>(categoryList).ToList();
+            foreach (string category in noDupes)
             {
                 categories.Items.Add(category);
                 categorySelect.Items.Add(category);
@@ -156,6 +159,48 @@ namespace AutomatedRSSReader
         {
             string category = categoryInput.Text;
             categoryList.Add(category);
+            DisplayListItems();
+        }
+
+        private void categoryRemove_Click(object sender, EventArgs e)
+        {
+            
+            //string selectedCategory = categories.SelectedItem.ToString();
+            //List<Podcast> podcastsToBeRemoved = new List<Podcast>();
+
+            //foreach (Podcast podcast in podcasts)
+            //{
+            //    if (podcast.Category == selectedCategory)
+            //    {
+            //        podcastsToBeRemoved.Add(podcast);
+            //    }
+            //}
+
+            //List<Podcast> result = podcastsToBeRemoved.Except(podcasts).ToList();
+
+            //OtherSerializer serializer = new OtherSerializer();
+            //serializer.Serialize(result);
+            //DisplayListItems();
+
+            string selectedCat = categories.SelectedItem.ToString();
+            List<Podcast> podcastsRemoved = new List<Podcast>();
+
+            foreach (Podcast podcast in podcasts)
+            {
+                if (podcast.Category.Equals(selectedCat))
+                {
+                    podcastsRemoved.Add(podcast);
+                }
+            }
+
+            List<Podcast> output =  podcasts.Except(podcastsRemoved).ToList();
+
+            OtherSerializer serializer = new OtherSerializer();
+            serializer.Serialize(output);
+
+            podcasts.Clear();
+            podcasts.AddRange(output);
+
             DisplayListItems();
         }
     }

@@ -102,6 +102,7 @@
             this.categoryRemove.TabIndex = 5;
             this.categoryRemove.Text = "Remove";
             this.categoryRemove.UseVisualStyleBackColor = true;
+            this.categoryRemove.Click += new System.EventHandler(this.categoryRemove_Click);
             // 
             // categoryNameLabel
             // 
