@@ -27,7 +27,8 @@ namespace AutomatedRSSReader
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
-            DisplayListItems();
+            DisplayPodcasts();
+            DisplayCategories();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace AutomatedRSSReader
                     podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                 }
             }
-            DisplayListItems();
+            DisplayPodcasts();
         }
 
         private void podcastSave_Click(object sender, EventArgs e)
@@ -85,7 +86,7 @@ namespace AutomatedRSSReader
             podcasts.Remove(selectedPodcast);
             OtherSerializer serializer = new OtherSerializer();
             serializer.Serialize(podcasts);
-            DisplayListItems();
+            DisplayPodcasts();
         }
 
         protected void CreateListOfPodcasts()
@@ -100,7 +101,7 @@ namespace AutomatedRSSReader
 
                 podcasts.AddRange(podcastList);
 
-                DisplayListItems();
+                DisplayPodcasts();
 
                 foreach (Podcast podcast in podcasts)
                 {
@@ -109,7 +110,7 @@ namespace AutomatedRSSReader
             }
         }
 
-        protected void DisplayListItems()
+        protected void DisplayPodcasts()
         {
             podcastList.Items.Clear();
             foreach (Podcast podcast in podcasts)
@@ -121,6 +122,10 @@ namespace AutomatedRSSReader
 
                 podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
             }
+        }
+
+        protected void DisplayCategories()
+        {
             categories.Items.Clear();
             categorySelect.Items.Clear();
 
@@ -159,49 +164,39 @@ namespace AutomatedRSSReader
         {
             string category = categoryInput.Text;
             categoryList.Add(category);
-            DisplayListItems();
+            DisplayCategories();
         }
 
         private void categoryRemove_Click(object sender, EventArgs e)
         {
-            
-            //string selectedCategory = categories.SelectedItem.ToString();
-            //List<Podcast> podcastsToBeRemoved = new List<Podcast>();
+            string selectedCat = categories.SelectedItem.ToString();
+            podcasts.RemoveAll(x => x.Category == selectedCat);
+
+            OtherSerializer serializer = new OtherSerializer();
+            serializer.Serialize(podcasts);
+            DisplayCategories();
+
+
+            //string selectedCat = categories.SelectedItem.ToString();
+            //List<Podcast> podcastsRemoved = new List<Podcast>();
 
             //foreach (Podcast podcast in podcasts)
             //{
-            //    if (podcast.Category == selectedCategory)
+            //    if (podcast.Category.Equals(selectedCat))
             //    {
-            //        podcastsToBeRemoved.Add(podcast);
+            //        podcastsRemoved.Add(podcast);
             //    }
             //}
 
-            //List<Podcast> result = podcastsToBeRemoved.Except(podcasts).ToList();
+            //List<Podcast> output =  podcasts.Except(podcastsRemoved).ToList();
 
             //OtherSerializer serializer = new OtherSerializer();
-            //serializer.Serialize(result);
+            //serializer.Serialize(output);
+
+            //podcasts.Clear();
+            //podcasts.AddRange(output);
+
             //DisplayListItems();
-
-            string selectedCat = categories.SelectedItem.ToString();
-            List<Podcast> podcastsRemoved = new List<Podcast>();
-
-            foreach (Podcast podcast in podcasts)
-            {
-                if (podcast.Category.Equals(selectedCat))
-                {
-                    podcastsRemoved.Add(podcast);
-                }
-            }
-
-            List<Podcast> output =  podcasts.Except(podcastsRemoved).ToList();
-
-            OtherSerializer serializer = new OtherSerializer();
-            serializer.Serialize(output);
-
-            podcasts.Clear();
-            podcasts.AddRange(output);
-
-            DisplayListItems();
         }
     }
 }
