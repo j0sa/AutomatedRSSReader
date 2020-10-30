@@ -11,6 +11,7 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.IO;
 using System.Data.SqlTypes;
+using System.Runtime.Serialization;
 
 namespace AutomatedRSSReader
 {
@@ -265,11 +266,14 @@ namespace AutomatedRSSReader
                 }
             }
 
-            categoryList.Remove(oldCatName);
-            categoryList.Add(newCatName);
-            DisplayCategories();
-
             serializer.Serialize(podcasts);
+
+            categoryList.Clear();
+            podcasts.Clear();
+
+            CreateListOfPodcasts();
+            DisplayPodcasts();
+            DisplayCategories();
         }
 
         private void categories_MouseClick(object sender, MouseEventArgs e)
