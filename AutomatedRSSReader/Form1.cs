@@ -251,7 +251,27 @@ namespace AutomatedRSSReader
             {
                 string item = categories.SelectedItem.ToString();
                 categoryInput.Text = item;
+
+                podcastList.Items.Clear();
+
+                foreach (Podcast podcast in podcasts)
+                {
+                    if (podcast.Category.Equals(item))
+                    {
+                        int numberOfEpisodes = podcast.NumberOfEpisodes;
+                        string name = podcast.Name;
+                        string category = podcast.Category;
+                        decimal freq = podcast.UpdateFreq;
+
+                        podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
+                    }
+                }
             }
+        }
+
+        private void categories_Leave(object sender, EventArgs e)
+        {
+            DisplayPodcasts();
         }
     }
 }

@@ -61,6 +61,7 @@
             this.categories.Size = new System.Drawing.Size(237, 95);
             this.categories.TabIndex = 0;
             this.categories.MouseClick += new System.Windows.Forms.MouseEventHandler(this.categories_MouseClick);
+            this.categories.Leave += new System.EventHandler(this.categories_Leave);
             // 
             // episodeList
             // 
