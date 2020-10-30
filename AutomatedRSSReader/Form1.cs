@@ -217,7 +217,6 @@ namespace AutomatedRSSReader
                     DisplayCategories();
                     DisplayPodcasts();
                 }
-                
             }
 
             ////LINQ
@@ -287,8 +286,11 @@ namespace AutomatedRSSReader
 
         private void categories_MouseClick(object sender, MouseEventArgs e)
         {
-            string item = categories.SelectedItem.ToString();
-            categoryInput.Text = item;
+            if (categories.SelectedItem != null)
+            {
+                string item = categories.SelectedItem.ToString();
+                categoryInput.Text = item;
+            }
         }
     }
 }
