@@ -20,24 +20,6 @@ namespace AutomatedRSSReader
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-
-            Console.WriteLine("Insert link");
-            string link = "http://www.svt.se/nyheter/rss.xml";
-
-            XmlReader reader = XmlReader.Create(link);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            Console.WriteLine(feed.Title.Text);
-
-            //Podcast podcast = new Podcast(link);
-            //Console.WriteLine(podcast.feed.Title.Text);
-            //Console.WriteLine(podcast.NumberOfEpisodes);
-
-            //List<Episode> episodeList = podcast.createListOfEpisodes();
-            //foreach (Episode episode in episodeList)
-            //{
-            //    Console.WriteLine(episode.Title);
-            //    Console.WriteLine(episode.Description);
-            //}
         }
     }
 }
