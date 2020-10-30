@@ -220,36 +220,6 @@ namespace AutomatedRSSReader
                 }
                 
             }
-
-            ////LINQ
-            //string selectedCat = categories.SelectedItem.ToString();
-            //podcasts.RemoveAll(x => x.Category == selectedCat);
-
-            //OtherSerializer serializer = new OtherSerializer();
-            //serializer.Serialize(podcasts);
-            //DisplayCategories();
-
-
-            //string selectedCat = categories.SelectedItem.ToString();
-            //List<Podcast> podcastsRemoved = new List<Podcast>();
-
-            //foreach (Podcast podcast in podcasts)
-            //{
-            //    if (podcast.Category.Equals(selectedCat))
-            //    {
-            //        podcastsRemoved.Add(podcast);
-            //    }
-            //}
-
-            //List<Podcast> output =  podcasts.Except(podcastsRemoved).ToList();
-
-            //OtherSerializer serializer = new OtherSerializer();
-            //serializer.Serialize(output);
-
-            //podcasts.Clear();
-            //podcasts.AddRange(output);
-
-            //DisplayListItems();
         }
 
         private void categorySave_Click(object sender, EventArgs e)
