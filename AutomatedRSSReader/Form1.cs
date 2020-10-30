@@ -189,15 +189,42 @@ namespace AutomatedRSSReader
             DisplayCategories();
         }
 
+
+
         private void categoryRemove_Click(object sender, EventArgs e)
         {
-            //LINQ
-            string selectedCat = categories.SelectedItem.ToString();
-            podcasts.RemoveAll(x => x.Category == selectedCat);
+            if (categories.SelectedItem != null)
+            {
 
-            OtherSerializer serializer = new OtherSerializer();
-            serializer.Serialize(podcasts);
-            DisplayCategories();
+                // Hämtar ut den valda kategorin som användaren väljer
+                string selectedCat = categories.SelectedItem.ToString();
+
+                // Variabler med information samt valmöjlighet
+                string message = "Are you sure you want to delete this category? ";
+                string caption = "Message from the program";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+
+                // För att visa en MessageBox samt raderar vald kategori med LINQ
+                result = MessageBox.Show(message, caption, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    podcasts.RemoveAll(x => x.Category == selectedCat);
+
+                    OtherSerializer serializer = new OtherSerializer();
+                    serializer.Serialize(podcasts);
+                    DisplayCategories();
+                }
+                
+            }
+
+            ////LINQ
+            //string selectedCat = categories.SelectedItem.ToString();
+            //podcasts.RemoveAll(x => x.Category == selectedCat);
+
+            //OtherSerializer serializer = new OtherSerializer();
+            //serializer.Serialize(podcasts);
+            //DisplayCategories();
 
 
             //string selectedCat = categories.SelectedItem.ToString();
