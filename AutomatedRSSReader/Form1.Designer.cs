@@ -46,11 +46,10 @@
             this.updateFreqLabel = new System.Windows.Forms.Label();
             this.podcastCategoryLabel = new System.Windows.Forms.Label();
             this.episodeDescription = new System.Windows.Forms.RichTextBox();
-            this.updateFreqSelect = new System.Windows.Forms.NumericUpDown();
             this.podcastList = new System.Windows.Forms.ListBox();
             this.podcastName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).BeginInit();
+            this.updateFreqSelect = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // categories
@@ -219,13 +218,6 @@
             this.episodeDescription.TabIndex = 19;
             this.episodeDescription.Text = "";
             // 
-            // updateFreqSelect
-            // 
-            this.updateFreqSelect.Location = new System.Drawing.Point(344, 201);
-            this.updateFreqSelect.Name = "updateFreqSelect";
-            this.updateFreqSelect.Size = new System.Drawing.Size(54, 20);
-            this.updateFreqSelect.TabIndex = 20;
-            // 
             // podcastList
             // 
             this.podcastList.FormattingEnabled = true;
@@ -251,13 +243,25 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Name:";
             // 
+            // updateFreqSelect
+            // 
+            this.updateFreqSelect.FormattingEnabled = true;
+            this.updateFreqSelect.Items.AddRange(new object[] {
+            "10",
+            "30",
+            "60"});
+            this.updateFreqSelect.Location = new System.Drawing.Point(344, 200);
+            this.updateFreqSelect.Name = "updateFreqSelect";
+            this.updateFreqSelect.Size = new System.Drawing.Size(54, 21);
+            this.updateFreqSelect.TabIndex = 24;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.updateFreqSelect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.podcastName);
             this.Controls.Add(this.podcastList);
-            this.Controls.Add(this.updateFreqSelect);
             this.Controls.Add(this.episodeDescription);
             this.Controls.Add(this.podcastCategoryLabel);
             this.Controls.Add(this.updateFreqLabel);
@@ -278,7 +282,6 @@
             this.Controls.Add(this.categories);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.updateFreqSelect)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,10 +307,10 @@
         private System.Windows.Forms.Label updateFreqLabel;
         private System.Windows.Forms.Label podcastCategoryLabel;
         private System.Windows.Forms.RichTextBox episodeDescription;
-        private System.Windows.Forms.NumericUpDown updateFreqSelect;
         private System.Windows.Forms.ListBox podcastList;
         private System.Windows.Forms.TextBox podcastName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox updateFreqSelect;
     }
 }
 

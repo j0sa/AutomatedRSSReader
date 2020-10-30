@@ -16,7 +16,7 @@ namespace AutomatedRSSReader
     public class Podcast
     {
         public string Url { get; set; }
-        public decimal UpdateFreq { get; set; }
+        public int UpdateFreq { get; set; }
         public int NumberOfEpisodes { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -27,7 +27,7 @@ namespace AutomatedRSSReader
 
         public List<Episode> Episodes = new List<Episode>();
 
-        public Podcast(string url, string name, decimal updateFreq, string category)
+        public Podcast(string url, string name, int updateFreq, string category)
         {
             Url = url;
             UpdateFreq = updateFreq;

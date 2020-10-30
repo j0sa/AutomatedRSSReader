@@ -43,7 +43,7 @@ namespace AutomatedRSSReader
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
                 string selectedCategory = categorySelect.Text;
-                podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, updateFreqSelect.Value, selectedCategory));
+                podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, int.Parse(updateFreqSelect.Text), selectedCategory));
                 urlInput.Text = "";
                 podcastName.Text = "";
                 OtherSerializer serializer = new OtherSerializer();
@@ -54,7 +54,7 @@ namespace AutomatedRSSReader
                     int numberOfEpisodes = podcast.NumberOfEpisodes;
                     string name = podcast.Name;
                     string category = podcast.Category;
-                    decimal freq = podcast.UpdateFreq;
+                    int freq = podcast.UpdateFreq;
 
                     podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                 }
@@ -70,7 +70,7 @@ namespace AutomatedRSSReader
             {
                 selectedPodcast.Url = urlInput.Text;
                 selectedPodcast.Name = podcastName.Text;
-                selectedPodcast.UpdateFreq = updateFreqSelect.Value;
+                selectedPodcast.UpdateFreq = int.Parse(updateFreqSelect.Text);
                 selectedPodcast.Category = categorySelect.Text;
             }
             
@@ -167,10 +167,11 @@ namespace AutomatedRSSReader
                     if (item.Contains(podcast.Name))
                     {
                         selectedPodcast = podcast;
+                        int updateFreq = int.Parse(updateFreqSelect.Text);
 
                         urlInput.Text = podcast.Url;
                         podcastName.Text = podcast.Name;
-                        updateFreqSelect.Value = podcast.UpdateFreq;
+                        updateFreq = podcast.UpdateFreq;
                         categorySelect.SelectedItem = podcast.Category;
 
                         podcastListLabel.Visible = true;
