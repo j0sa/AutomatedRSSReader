@@ -189,8 +189,6 @@ namespace AutomatedRSSReader
             DisplayCategories();
         }
 
-
-
         private void categoryRemove_Click(object sender, EventArgs e)
         {
             if (categories.SelectedItem != null)
@@ -213,7 +211,10 @@ namespace AutomatedRSSReader
 
                     OtherSerializer serializer = new OtherSerializer();
                     serializer.Serialize(podcasts);
+
+                    categoryList.Remove(selectedCat);
                     DisplayCategories();
+                    DisplayPodcasts();
                 }
                 
             }
