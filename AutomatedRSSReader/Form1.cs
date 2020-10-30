@@ -26,6 +26,7 @@ namespace AutomatedRSSReader
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
+            podcastListLabel.Visible = false;
             CreateListOfPodcasts();
             DisplayPodcasts();
             DisplayCategories();
@@ -169,6 +170,9 @@ namespace AutomatedRSSReader
                         podcastName.Text = podcast.Name;
                         updateFreqSelect.Value = podcast.UpdateFreq;
                         categorySelect.SelectedItem = podcast.Category;
+
+                        podcastListLabel.Visible = true;
+                        podcastListLabel.Text = podcast.Name;
 
                         foreach (Episode episode in podcast.Episodes)
                         {
