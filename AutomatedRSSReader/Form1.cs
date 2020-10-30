@@ -61,7 +61,14 @@ namespace AutomatedRSSReader
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
-
+            selectedPodcast.Url = urlInput.Text;
+            selectedPodcast.Name = podcastName.Text;
+            selectedPodcast.UpdateFreq = updateFreqSelect.Value;
+            selectedPodcast.Category = categorySelect.Text;
+            OtherSerializer serializer = new OtherSerializer();
+            serializer.Serialize(podcasts);
+            podcastList.Items.Clear();
+            DisplayPodcasts();
         }
 
         // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
