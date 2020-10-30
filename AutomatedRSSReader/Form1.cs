@@ -15,7 +15,6 @@ namespace AutomatedRSSReader
 {
     public partial class Form1 : Form
     {
-
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
