@@ -61,11 +61,16 @@ namespace AutomatedRSSReader
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
-            selectedPodcast.Url = urlInput.Text;
-            selectedPodcast.Name = podcastName.Text;
-            selectedPodcast.UpdateFreq = updateFreqSelect.Value;
-            selectedPodcast.Category = categorySelect.Text;
             OtherSerializer serializer = new OtherSerializer();
+
+            if (urlInput.Text != null || podcastName != null || categorySelect.Text != null)
+            {
+                selectedPodcast.Url = urlInput.Text;
+                selectedPodcast.Name = podcastName.Text;
+                selectedPodcast.UpdateFreq = updateFreqSelect.Value;
+                selectedPodcast.Category = categorySelect.Text;
+            }
+            
             serializer.Serialize(podcasts);
             podcastList.Items.Clear();
             DisplayPodcasts();
