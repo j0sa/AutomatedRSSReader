@@ -218,5 +218,10 @@ namespace AutomatedRSSReader
 
             //DisplayListItems();
         }
+
+        private void categorySave_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -95,6 +95,7 @@
             this.categorySave.TabIndex = 4;
             this.categorySave.Text = "Save";
             this.categorySave.UseVisualStyleBackColor = true;
+            this.categorySave.Click += new System.EventHandler(this.categorySave_Click);
             // 
             // categoryRemove
             // 
