@@ -257,11 +257,11 @@ namespace AutomatedRSSReader
             string oldCatName = categories.SelectedItem.ToString();
             string newCatName = categoryInput.Text;
 
-            foreach (Podcast episode in podcasts)
+            foreach (Podcast podcast in podcasts)
             {
-                if (episode.Category.Equals(oldCatName))
+                if (podcast.Category.Equals(oldCatName))
                 {
-                    episode.Category = newCatName;
+                    podcast.Category = newCatName;
                 }
             }
 
@@ -274,7 +274,7 @@ namespace AutomatedRSSReader
 
         private void categories_MouseClick(object sender, MouseEventArgs e)
         {
-            if (categoryList != null)
+            if (categories.SelectedItem != null)
             {
                 string item = categories.SelectedItem.ToString();
                 categoryInput.Text = item;
