@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.IO;
+using System.Data.SqlTypes;
 
 namespace AutomatedRSSReader
 {
@@ -19,6 +20,8 @@ namespace AutomatedRSSReader
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
         public List<string> categoryList = new List<string>();
+        public string oldCatName;
+
         public Form1()
         {
             InitializeComponent();
@@ -223,6 +226,40 @@ namespace AutomatedRSSReader
         }
 
         private void categorySave_Click(object sender, EventArgs e)
+        {
+            
+            
+            var newCatName = categoryInput.Text;
+            
+            
+
+            foreach(var p in podcasts)
+            {
+                if (p.Category.Equals(oldCatName))
+                {
+                    
+                    p.Category.Replace(oldCatName, newCatName);
+                    
+
+                }
+                
+            }
+
+
+        }
+
+        public void categories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.oldCatName = categories.SelectedItem.ToString();
+            
+
+        }
+        private void categoryInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void podcastList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

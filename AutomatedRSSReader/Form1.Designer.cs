@@ -60,6 +60,7 @@
             this.categories.Name = "categories";
             this.categories.Size = new System.Drawing.Size(237, 95);
             this.categories.TabIndex = 0;
+            this.categories.SelectedIndexChanged += new System.EventHandler(this.categories_SelectedIndexChanged);
             // 
             // episodeList
             // 
@@ -76,6 +77,7 @@
             this.categoryInput.Name = "categoryInput";
             this.categoryInput.Size = new System.Drawing.Size(237, 20);
             this.categoryInput.TabIndex = 2;
+            this.categoryInput.TextChanged += new System.EventHandler(this.categoryInput_TextChanged);
             // 
             // categoryNew
             // 
@@ -232,6 +234,7 @@
             this.podcastList.Size = new System.Drawing.Size(507, 160);
             this.podcastList.TabIndex = 21;
             this.podcastList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.podcastList_MouseClick);
+            this.podcastList.SelectedIndexChanged += new System.EventHandler(this.podcastList_SelectedIndexChanged);
             // 
             // podcastName
             // 
