@@ -193,11 +193,11 @@
             // updateFreqLabel
             // 
             this.updateFreqLabel.AutoSize = true;
-            this.updateFreqLabel.Location = new System.Drawing.Point(326, 181);
+            this.updateFreqLabel.Location = new System.Drawing.Point(341, 181);
             this.updateFreqLabel.Name = "updateFreqLabel";
-            this.updateFreqLabel.Size = new System.Drawing.Size(63, 13);
+            this.updateFreqLabel.Size = new System.Drawing.Size(54, 13);
             this.updateFreqLabel.TabIndex = 16;
-            this.updateFreqLabel.Text = "Updatefreq:";
+            this.updateFreqLabel.Text = "Upd. freq:";
             // 
             // podcastCategoryLabel
             // 
@@ -221,9 +221,9 @@
             // 
             // updateFreqSelect
             // 
-            this.updateFreqSelect.Location = new System.Drawing.Point(329, 201);
+            this.updateFreqSelect.Location = new System.Drawing.Point(344, 201);
             this.updateFreqSelect.Name = "updateFreqSelect";
-            this.updateFreqSelect.Size = new System.Drawing.Size(49, 20);
+            this.updateFreqSelect.Size = new System.Drawing.Size(54, 20);
             this.updateFreqSelect.TabIndex = 20;
             // 
             // podcastList
@@ -240,7 +240,7 @@
             // 
             this.podcastName.Location = new System.Drawing.Point(205, 200);
             this.podcastName.Name = "podcastName";
-            this.podcastName.Size = new System.Drawing.Size(118, 20);
+            this.podcastName.Size = new System.Drawing.Size(133, 20);
             this.podcastName.TabIndex = 22;
             // 
             // label1
