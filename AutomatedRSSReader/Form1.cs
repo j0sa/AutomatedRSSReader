@@ -218,7 +218,6 @@ namespace AutomatedRSSReader
                     DisplayCategories();
                     DisplayPodcasts();
                 }
-                
             }
         }
 
