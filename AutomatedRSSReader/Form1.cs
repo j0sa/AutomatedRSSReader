@@ -20,7 +20,6 @@ namespace AutomatedRSSReader
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
         public List<string> categoryList = new List<string>();
-        public string oldCatName;
 
         public Form1()
         {
@@ -196,7 +195,6 @@ namespace AutomatedRSSReader
         {
             if (categories.SelectedItem != null)
             {
-
                 // Hämtar ut den valda kategorin som användaren väljer
                 string selectedCat = categories.SelectedItem.ToString();
 
@@ -255,41 +253,42 @@ namespace AutomatedRSSReader
 
         private void categorySave_Click(object sender, EventArgs e)
         {
-            
-            
-            var newCatName = categoryInput.Text;
-            
-            
+            OtherSerializer serializer = new OtherSerializer();
+            string oldCatName = categories.SelectedItem.ToString();
+            string newCatName = categoryInput.Text;
 
-            foreach(var p in podcasts)
+            foreach (Podcast episode in podcasts)
             {
-                if (p.Category.Equals(oldCatName))
+                if (episode.Category.Equals(oldCatName))
                 {
-                    
-                    p.Category.Replace(oldCatName, newCatName);
-                    
-
+                    episode.Category = newCatName;
                 }
-                
             }
 
+            serializer.Serialize(podcasts);
+            podcastList.Items.Clear();
+            DisplayPodcasts();
+            DisplayCategories();
 
+            //OtherSerializer serializer = new OtherSerializer();
+
+            //if (urlInput.Text != null || podcastName != null || categorySelect.Text != null)
+            //{
+            //    selectedPodcast.Url = urlInput.Text;
+            //    selectedPodcast.Name = podcastName.Text;
+            //    selectedPodcast.UpdateFreq = updateFreqSelect.Value;
+            //    selectedPodcast.Category = categorySelect.Text;
+            //}
+
+            //serializer.Serialize(podcasts);
+            //podcastList.Items.Clear();
+            //DisplayPodcasts();
         }
 
-        public void categories_SelectedIndexChanged(object sender, EventArgs e)
+        private void categories_MouseClick(object sender, MouseEventArgs e)
         {
-            this.oldCatName = categories.SelectedItem.ToString();
-            
-
-        }
-        private void categoryInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void podcastList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            string item = categories.SelectedItem.ToString();
+            categoryInput.Text = item;
         }
     }
 }
