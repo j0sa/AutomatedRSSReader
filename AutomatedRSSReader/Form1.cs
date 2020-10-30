@@ -265,30 +265,20 @@ namespace AutomatedRSSReader
                 }
             }
 
-            serializer.Serialize(podcasts);
-            podcastList.Items.Clear();
-            DisplayPodcasts();
+            categoryList.Remove(oldCatName);
+            categoryList.Add(newCatName);
             DisplayCategories();
 
-            //OtherSerializer serializer = new OtherSerializer();
-
-            //if (urlInput.Text != null || podcastName != null || categorySelect.Text != null)
-            //{
-            //    selectedPodcast.Url = urlInput.Text;
-            //    selectedPodcast.Name = podcastName.Text;
-            //    selectedPodcast.UpdateFreq = updateFreqSelect.Value;
-            //    selectedPodcast.Category = categorySelect.Text;
-            //}
-
-            //serializer.Serialize(podcasts);
-            //podcastList.Items.Clear();
-            //DisplayPodcasts();
+            serializer.Serialize(podcasts);
         }
 
         private void categories_MouseClick(object sender, MouseEventArgs e)
         {
-            string item = categories.SelectedItem.ToString();
-            categoryInput.Text = item;
+            if (categoryList != null)
+            {
+                string item = categories.SelectedItem.ToString();
+                categoryInput.Text = item;
+            }
         }
     }
 }
