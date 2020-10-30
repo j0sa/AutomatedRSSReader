@@ -198,6 +198,7 @@ namespace AutomatedRSSReader
             OtherSerializer serializer = new OtherSerializer();
             serializer.Serialize(podcasts);
             DisplayCategories();
+            DisplayPodcasts();
 
 
             //string selectedCat = categories.SelectedItem.ToString();
@@ -224,7 +225,7 @@ namespace AutomatedRSSReader
 
         private void categorySave_Click(object sender, EventArgs e)
         {
-
+             
         }
     }
 }
