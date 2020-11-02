@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AutomatedRSSReader
 {
     [Serializable]
-    public class Episode
+    public class Episode : ITitleable
     {
         public string Title { get; set; }
         public string Description { get; set; }

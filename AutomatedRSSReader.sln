@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedRSSReader", "AutomatedRSSReader\AutomatedRSSReader.csproj", "{1D254D6D-994C-428F-81F6-7AC8A0B89D42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{DDE8B459-3A85-4937-BA4B-7F5A442DD76D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

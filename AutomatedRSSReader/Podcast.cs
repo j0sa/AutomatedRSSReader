@@ -13,7 +13,7 @@ using System.Xml.Linq;
 namespace AutomatedRSSReader
 {
     [Serializable]
-    public class Podcast
+    public class Podcast : ITitleable
     {
         public string Url { get; set; }
         public int UpdateFreq { get; set; }
