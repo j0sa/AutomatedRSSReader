@@ -28,7 +28,7 @@ namespace AutomatedRSSReader
         {
             InitializeComponent();
             
-            timer.Interval = 10000;
+            timer.Interval = 30000;
             timer.Tick += TimerTick;
             timer.Start();
 
@@ -295,6 +295,10 @@ namespace AutomatedRSSReader
                 if (podcast.NeedsUpdate)
                 {
                     podcast.Update();
+                }
+                else
+                {
+                    Console.WriteLine("NeedsUpdate == false");
                 }
             }
 

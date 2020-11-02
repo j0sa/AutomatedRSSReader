@@ -50,7 +50,7 @@ namespace AutomatedRSSReader
         {
             get
             {
-                return NextUpdate <= DateTime.Now;
+                return NextUpdate.Minute == DateTime.Now.Minute;
             }
         }
 
