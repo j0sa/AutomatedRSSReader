@@ -70,7 +70,7 @@ namespace AutomatedRSSReader
             {
                 selectedPodcast.Url = urlInput.Text;
                 selectedPodcast.Name = podcastName.Text;
-                selectedPodcast.UpdateFreq = int.Parse(updateFreqSelect.Text);
+                selectedPodcast.UpdateFreq = updateFreqSelect.SelectedIndex;
                 selectedPodcast.Category = categorySelect.Text;
             }
             
@@ -134,7 +134,7 @@ namespace AutomatedRSSReader
                 int numberOfEpisodes = podcast.NumberOfEpisodes;
                 string name = podcast.Name;
                 string category = podcast.Category;
-                decimal freq = podcast.UpdateFreq;
+                int freq = podcast.UpdateFreq;
 
                 podcastList.Items.Add($"{name}; {numberOfEpisodes}, {freq}, {category}");
             }
@@ -167,11 +167,10 @@ namespace AutomatedRSSReader
                     if (item.Contains(podcast.Name))
                     {
                         selectedPodcast = podcast;
-                        int updateFreq = int.Parse(updateFreqSelect.Text);
 
                         urlInput.Text = podcast.Url;
                         podcastName.Text = podcast.Name;
-                        updateFreq = podcast.UpdateFreq;
+                        updateFreqSelect.SelectedItem = podcast.UpdateFreq;
                         categorySelect.SelectedItem = podcast.Category;
 
                         podcastListLabel.Visible = true;
@@ -262,7 +261,7 @@ namespace AutomatedRSSReader
                         int numberOfEpisodes = podcast.NumberOfEpisodes;
                         string name = podcast.Name;
                         string category = podcast.Category;
-                        decimal freq = podcast.UpdateFreq;
+                        int freq = podcast.UpdateFreq;
 
                         podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
                     }
