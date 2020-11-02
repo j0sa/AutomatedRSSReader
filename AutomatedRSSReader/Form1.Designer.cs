@@ -41,7 +41,6 @@
             this.podcastSave = new System.Windows.Forms.Button();
             this.podcastNew = new System.Windows.Forms.Button();
             this.categorySelect = new System.Windows.Forms.ComboBox();
-            this.podcastListLabel = new System.Windows.Forms.Label();
             this.urlLabel = new System.Windows.Forms.Label();
             this.updateFreqLabel = new System.Windows.Forms.Label();
             this.podcastCategoryLabel = new System.Windows.Forms.Label();
@@ -50,6 +49,7 @@
             this.podcastName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.updateFreqSelect = new System.Windows.Forms.ComboBox();
+            this.getEntityType = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // categories
@@ -171,15 +171,6 @@
             this.categorySelect.Size = new System.Drawing.Size(115, 21);
             this.categorySelect.TabIndex = 12;
             // 
-            // podcastListLabel
-            // 
-            this.podcastListLabel.AutoSize = true;
-            this.podcastListLabel.Location = new System.Drawing.Point(12, 238);
-            this.podcastListLabel.Name = "podcastListLabel";
-            this.podcastListLabel.Size = new System.Drawing.Size(35, 13);
-            this.podcastListLabel.TabIndex = 14;
-            this.podcastListLabel.Text = "label1";
-            // 
             // urlLabel
             // 
             this.urlLabel.AutoSize = true;
@@ -255,9 +246,20 @@
             this.updateFreqSelect.Size = new System.Drawing.Size(54, 21);
             this.updateFreqSelect.TabIndex = 24;
             // 
+            // getEntityType
+            // 
+            this.getEntityType.Location = new System.Drawing.Point(15, 225);
+            this.getEntityType.Name = "getEntityType";
+            this.getEntityType.Size = new System.Drawing.Size(106, 23);
+            this.getEntityType.TabIndex = 25;
+            this.getEntityType.Text = "What is selected?";
+            this.getEntityType.UseVisualStyleBackColor = true;
+            this.getEntityType.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(780, 457);
+            this.Controls.Add(this.getEntityType);
             this.Controls.Add(this.updateFreqSelect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.podcastName);
@@ -266,7 +268,6 @@
             this.Controls.Add(this.podcastCategoryLabel);
             this.Controls.Add(this.updateFreqLabel);
             this.Controls.Add(this.urlLabel);
-            this.Controls.Add(this.podcastListLabel);
             this.Controls.Add(this.categorySelect);
             this.Controls.Add(this.podcastNew);
             this.Controls.Add(this.podcastSave);
@@ -302,7 +303,6 @@
         private System.Windows.Forms.Button podcastSave;
         private System.Windows.Forms.Button podcastNew;
         private System.Windows.Forms.ComboBox categorySelect;
-        private System.Windows.Forms.Label podcastListLabel;
         private System.Windows.Forms.Label urlLabel;
         private System.Windows.Forms.Label updateFreqLabel;
         private System.Windows.Forms.Label podcastCategoryLabel;
@@ -311,6 +311,7 @@
         private System.Windows.Forms.TextBox podcastName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox updateFreqSelect;
+        private System.Windows.Forms.Button getEntityType;
     }
 }
 

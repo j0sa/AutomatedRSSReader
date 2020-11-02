@@ -13,7 +13,7 @@ using System.Xml.Linq;
 namespace AutomatedRSSReader
 {
     [Serializable]
-    public class Podcast : ITitleable
+    public class Podcast : Entity, ITitleable
     {
         public string Url { get; set; }
         public int UpdateFreq { get; set; }
@@ -27,6 +27,11 @@ namespace AutomatedRSSReader
         public DateTime NextUpdate { get; set; }
 
         public List<Episode> Episodes = new List<Episode>();
+
+        public override string EntityType()
+        {
+            return "A podcast.\n";
+        }
 
         public Podcast(string url, string name, int updateFreq, string category)
         {

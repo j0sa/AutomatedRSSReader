@@ -27,15 +27,14 @@ namespace AutomatedRSSReader
         public Form1()
         {
             InitializeComponent();
-            
+
             timer.Interval = 30000;
             timer.Tick += TimerTick;
             timer.Start();
 
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
-            episodeDescription.ReadOnly = true; 
-            podcastListLabel.Visible = false;
+            episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
             DisplayPodcasts();
             DisplayCategories();
@@ -50,14 +49,14 @@ namespace AutomatedRSSReader
             if (!String.IsNullOrEmpty(urlInput.Text))
             {
                 if (Validation.IfCorrectURL(urlInput.Text))
-                { 
+                {
                     string selectedCategory = categorySelect.Text;
 
                     if (!string.IsNullOrWhiteSpace(updateFreqSelect.Text) || !string.IsNullOrWhiteSpace(selectedCategory))
                     {
                         podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, int.Parse(updateFreqSelect.Text), selectedCategory));
                     }
-                    
+
                     urlInput.Text = "";
                     podcastName.Text = "";
 
@@ -89,7 +88,7 @@ namespace AutomatedRSSReader
                 selectedPodcast.UpdateFreq = int.Parse(updateFreqSelect.Text);
                 selectedPodcast.Category = categorySelect.Text;
             }
-            
+
             serializer.Serialize(podcasts);
             podcastList.Items.Clear();
             DisplayPodcasts();
@@ -186,9 +185,6 @@ namespace AutomatedRSSReader
 
                         urlInput.Text = podcast.Url;
                         podcastName.Text = podcast.Name;
-
-                        podcastListLabel.Visible = true;
-                        podcastListLabel.Text = podcast.Name;
 
                         foreach (Episode episode in podcast.Episodes)
                         {
@@ -288,7 +284,7 @@ namespace AutomatedRSSReader
             DisplayPodcasts();
         }
 
-        private void TimerTick (object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
             foreach (Podcast podcast in podcasts)
             {
@@ -308,6 +304,30 @@ namespace AutomatedRSSReader
             CreateListOfPodcasts();
             DisplayPodcasts();
             DisplayCategories();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string selectedEntity = "You have selected:\n";
+            bool anythingWasSelected = false;
+            if (episodeList.SelectedItems.Count == 1)
+            {
+                selectedEntity += new Episode().EntityType();
+                anythingWasSelected = true;
+            }
+            if (podcastList.SelectedItems.Count == 1)
+            {
+                selectedEntity += new Podcast().EntityType();
+                anythingWasSelected = true;
+            }
+            if (anythingWasSelected)
+            {
+                MessageBox.Show(selectedEntity);
+            }
+            else
+            {
+                MessageBox.Show("You have not selected anything!");
+            }
         }
     }
 }
