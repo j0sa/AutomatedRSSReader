@@ -28,7 +28,7 @@ namespace AutomatedRSSReader
         {
             InitializeComponent();
             
-            timer.Interval = 1000;
+            timer.Interval = 10000;
             timer.Tick += TimerTick;
             timer.Start();
 

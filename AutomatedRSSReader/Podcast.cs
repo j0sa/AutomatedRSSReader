@@ -58,6 +58,8 @@ namespace AutomatedRSSReader
         {
             NextUpdate = DateTime.Now.AddMinutes(UpdateFreq);
             createTitleAndDescription();
+            createListOfEpisodes();
+            NumberOfEpisodes = this.Episodes.Count;
             Console.WriteLine(Name + "'s Update() was invoked. Next update is at " + NextUpdate);
         }
 
