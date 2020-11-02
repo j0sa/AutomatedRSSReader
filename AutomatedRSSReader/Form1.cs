@@ -306,7 +306,7 @@ namespace AutomatedRSSReader
             DisplayCategories();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void getEntityType_Click(object sender, EventArgs e)
         {
             string selectedEntity = "You have selected:\n";
             bool anythingWasSelected = false;

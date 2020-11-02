@@ -128,7 +128,7 @@
             // 
             // urlInput
             // 
-            this.urlInput.Location = new System.Drawing.Point(15, 200);
+            this.urlInput.Location = new System.Drawing.Point(12, 200);
             this.urlInput.Name = "urlInput";
             this.urlInput.Size = new System.Drawing.Size(184, 20);
             this.urlInput.TabIndex = 8;
@@ -248,13 +248,13 @@
             // 
             // getEntityType
             // 
-            this.getEntityType.Location = new System.Drawing.Point(15, 225);
+            this.getEntityType.Location = new System.Drawing.Point(12, 225);
             this.getEntityType.Name = "getEntityType";
             this.getEntityType.Size = new System.Drawing.Size(106, 23);
             this.getEntityType.TabIndex = 25;
             this.getEntityType.Text = "What is selected?";
             this.getEntityType.UseVisualStyleBackColor = true;
-            this.getEntityType.Click += new System.EventHandler(this.button1_Click);
+            this.getEntityType.Click += new System.EventHandler(this.getEntityType_Click);
             // 
             // Form1
             // 
