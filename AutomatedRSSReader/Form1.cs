@@ -17,6 +17,8 @@ namespace AutomatedRSSReader
 {
     public partial class Form1 : Form
     {
+        private Timer timer = new Timer();
+
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
@@ -25,6 +27,11 @@ namespace AutomatedRSSReader
         public Form1()
         {
             InitializeComponent();
+            
+            timer.Interval = 1000;
+            timer.Tick += TimerTick;
+            timer.Start();
+
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
@@ -270,7 +277,7 @@ namespace AutomatedRSSReader
                         string category = podcast.Category;
                         int freq = podcast.UpdateFreq;
 
-                        podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
+                        podcastList.Items.Add($"{name}, {numberOfEpisodes}, {freq}, {category}");
                     }
                 }
             }
@@ -279,6 +286,24 @@ namespace AutomatedRSSReader
         private void categories_Leave(object sender, EventArgs e)
         {
             DisplayPodcasts();
+        }
+
+        private void TimerTick (object sender, EventArgs e)
+        {
+            foreach (Podcast podcast in podcasts)
+            {
+                if (podcast.NeedsUpdate)
+                {
+                    podcast.Update();
+                }
+            }
+
+            categoryList.Clear();
+            podcasts.Clear();
+
+            CreateListOfPodcasts();
+            DisplayPodcasts();
+            DisplayCategories();
         }
     }
 }

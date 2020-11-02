@@ -24,6 +24,7 @@ namespace AutomatedRSSReader
         public string LastUpdatedTime { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
+        public DateTime NextUpdate { get; set; }
 
         public List<Episode> Episodes = new List<Episode>();
 
@@ -37,11 +38,27 @@ namespace AutomatedRSSReader
             createTitleAndDescription();
             createListOfEpisodes();
             NumberOfEpisodes = this.Episodes.Count;
+            Update();
         }
 
         public Podcast()
         {
 
+        }
+
+        public bool NeedsUpdate
+        {
+            get
+            {
+                return NextUpdate <= DateTime.Now;
+            }
+        }
+
+        public void Update()
+        {
+            NextUpdate = DateTime.Now.AddMinutes(UpdateFreq);
+            createTitleAndDescription();
+            Console.WriteLine(Name + "'s Update() was invoked. Next update is at " + NextUpdate);
         }
 
         protected void createTitleAndDescription()
