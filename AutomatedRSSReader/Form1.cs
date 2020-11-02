@@ -70,7 +70,7 @@ namespace AutomatedRSSReader
             {
                 selectedPodcast.Url = urlInput.Text;
                 selectedPodcast.Name = podcastName.Text;
-                selectedPodcast.UpdateFreq = updateFreqSelect.SelectedIndex;
+                selectedPodcast.UpdateFreq = int.Parse(updateFreqSelect.Text);
                 selectedPodcast.Category = categorySelect.Text;
             }
             
