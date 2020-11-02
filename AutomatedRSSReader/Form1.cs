@@ -45,23 +45,28 @@ namespace AutomatedRSSReader
                 if (Validation.IfCorrectURL(urlInput.Text))
                 { 
                     string selectedCategory = categorySelect.Text;
-                podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, int.Parse(updateFreqSelect.Text), selectedCategory));
-                urlInput.Text = "";
-                podcastName.Text = "";
 
-                OtherSerializer serializer = new OtherSerializer();
-                serializer.Serialize(podcasts);
-                podcastList.Items.Clear();
-                foreach (Podcast podcast in podcasts)
-                {
-                    int numberOfEpisodes = podcast.NumberOfEpisodes;
-                    string name = podcast.Name;
-                    string category = podcast.Category;
-                    int freq = podcast.UpdateFreq;
+                    if (!string.IsNullOrWhiteSpace(updateFreqSelect.Text) || !string.IsNullOrWhiteSpace(selectedCategory))
+                    {
+                        podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, int.Parse(updateFreqSelect.Text), selectedCategory));
+                    }
+                    
+                    urlInput.Text = "";
+                    podcastName.Text = "";
 
-                    podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
+                    OtherSerializer serializer = new OtherSerializer();
+                    serializer.Serialize(podcasts);
+                    podcastList.Items.Clear();
+                    foreach (Podcast podcast in podcasts)
+                    {
+                        int numberOfEpisodes = podcast.NumberOfEpisodes;
+                        string name = podcast.Name;
+                        string category = podcast.Category;
+                        int freq = podcast.UpdateFreq;
+
+                        podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
+                    }
                 }
-            }
             }
             DisplayPodcasts();
         }
@@ -174,8 +179,6 @@ namespace AutomatedRSSReader
 
                         urlInput.Text = podcast.Url;
                         podcastName.Text = podcast.Name;
-                        updateFreqSelect.SelectedItem = podcast.UpdateFreq;
-                        categorySelect.SelectedItem = podcast.Category;
 
                         podcastListLabel.Visible = true;
                         podcastListLabel.Text = podcast.Name;
