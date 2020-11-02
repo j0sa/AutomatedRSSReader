@@ -34,7 +34,7 @@ namespace AutomatedRSSReader
 
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
-            episodeDescription.ReadOnly = true;
+            episodeDescription.ReadOnly = true; 
             podcastListLabel.Visible = false;
             CreateListOfPodcasts();
             DisplayPodcasts();
@@ -298,7 +298,7 @@ namespace AutomatedRSSReader
                 }
                 else
                 {
-                    Console.WriteLine("NeedsUpdate == false");
+                    Console.WriteLine(podcast.Name + ".NeedsUpdate == false");
                 }
             }
 
