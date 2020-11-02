@@ -12,13 +12,16 @@ using System.ServiceModel.Syndication;
 using System.IO;
 using System.Data.SqlTypes;
 using System.Runtime.Serialization;
+using Business;
+using Models;
+using Data;
 
 namespace AutomatedRSSReader
 {
     public partial class Form1 : Form
     {
         private Timer timer = new Timer();
-
+        LogicController lc = new LogicController();
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
@@ -31,12 +34,12 @@ namespace AutomatedRSSReader
             timer.Interval = 30000;
             timer.Tick += TimerTick;
             timer.Start();
-
+            
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
             DisplayCategories();
         }
 
@@ -46,35 +49,15 @@ namespace AutomatedRSSReader
 
         private void podcastNew_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(urlInput.Text))
-            {
-                if (Validation.IfCorrectURL(urlInput.Text))
-                {
-                    string selectedCategory = categorySelect.Text;
+            string url = urlInput.Text;
+            string category = categorySelect.Text;
+            string updateFreq = updateFreqSelect.Text;
+            string name = podcastName.Text;
+            var listBox = podcastList.Items;
 
-                    if (!string.IsNullOrWhiteSpace(updateFreqSelect.Text) || !string.IsNullOrWhiteSpace(selectedCategory))
-                    {
-                        podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, int.Parse(updateFreqSelect.Text), selectedCategory));
-                    }
-
-                    urlInput.Text = "";
-                    podcastName.Text = "";
-
-                    OtherSerializer serializer = new OtherSerializer();
-                    serializer.Serialize(podcasts);
-                    podcastList.Items.Clear();
-                    foreach (Podcast podcast in podcasts)
-                    {
-                        int numberOfEpisodes = podcast.NumberOfEpisodes;
-                        string name = podcast.Name;
-                        string category = podcast.Category;
-                        int freq = podcast.UpdateFreq;
-
-                        podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
-                    }
-                }
-            }
-            DisplayPodcasts();
+            
+            lc.AddNewPodcast(url, category, updateFreq, name);
+            DisplayPodcasts(podcasts);
         }
 
         private void podcastSave_Click(object sender, EventArgs e)
@@ -91,7 +74,8 @@ namespace AutomatedRSSReader
 
             serializer.Serialize(podcasts);
             podcastList.Items.Clear();
-            DisplayPodcasts();
+
+            DisplayPodcasts(podcasts);
         }
 
         // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
@@ -117,7 +101,7 @@ namespace AutomatedRSSReader
             podcasts.Remove(selectedPodcast);
             OtherSerializer serializer = new OtherSerializer();
             serializer.Serialize(podcasts);
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
         }
 
         protected void CreateListOfPodcasts()
@@ -132,7 +116,7 @@ namespace AutomatedRSSReader
 
                 podcasts.AddRange(podcastList);
 
-                DisplayPodcasts();
+                DisplayPodcasts(podcasts);
 
                 foreach (Podcast podcast in podcasts)
                 {
@@ -141,10 +125,10 @@ namespace AutomatedRSSReader
             }
         }
 
-        protected void DisplayPodcasts()
+        protected void DisplayPodcasts(List<Podcast> poddar)
         {
             podcastList.Items.Clear();
-            foreach (Podcast podcast in podcasts)
+            foreach (Podcast podcast in poddar)
             {
                 int numberOfEpisodes = podcast.NumberOfEpisodes;
                 string name = podcast.Name;
@@ -226,7 +210,7 @@ namespace AutomatedRSSReader
 
                     categoryList.Remove(selectedCat);
                     DisplayCategories();
-                    DisplayPodcasts();
+                    DisplayPodcasts(podcasts);
                 }
             }
         }
@@ -251,7 +235,7 @@ namespace AutomatedRSSReader
             podcasts.Clear();
 
             CreateListOfPodcasts();
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
             DisplayCategories();
         }
 
@@ -281,7 +265,7 @@ namespace AutomatedRSSReader
 
         private void categories_Leave(object sender, EventArgs e)
         {
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -302,7 +286,7 @@ namespace AutomatedRSSReader
             podcasts.Clear();
 
             CreateListOfPodcasts();
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
             DisplayCategories();
         }
 
