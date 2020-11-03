@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Models;
 
-namespace AutomatedRSSReader
+
+namespace Data
 {
-    class OtherSerializer
+    public class OtherSerializer
     {
         public void Serialize(Podcast podcast)
         {
@@ -26,13 +28,13 @@ namespace AutomatedRSSReader
                 xmlSerializer.Serialize(outFile, podcastList);
             }
         }
-        public Podcast Deserialize()
+        public Podcast  Deserialize()
         {
             Podcast podcastObjToBeReturned;
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Podcast));
             using (FileStream inFile = new FileStream("PodcastData.xml", FileMode.Open, FileAccess.Read))
             {
-                podcastObjToBeReturned = (Podcast)xmlSerializer.Deserialize(inFile);
+               podcastObjToBeReturned = (Podcast)xmlSerializer.Deserialize(inFile);
             }
             return podcastObjToBeReturned;
         }

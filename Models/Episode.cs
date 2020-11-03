@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomatedRSSReader
+namespace Models
 {
     [Serializable]
     public class Episode : Entity, ITitleable

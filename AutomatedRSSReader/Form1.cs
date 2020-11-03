@@ -12,13 +12,16 @@ using System.ServiceModel.Syndication;
 using System.IO;
 using System.Data.SqlTypes;
 using System.Runtime.Serialization;
+using Business;
+using Models;
+using Data;
 
 namespace AutomatedRSSReader
 {
     public partial class Form1 : Form
     {
         private Timer timer = new Timer();
-
+        LogicController lc = new LogicController();
         public SyndicationFeed feed;
         public List<Podcast> podcasts = new List<Podcast>();
         public Podcast selectedPodcast;
@@ -31,70 +34,48 @@ namespace AutomatedRSSReader
             timer.Interval = 30000;
             timer.Tick += TimerTick;
             timer.Start();
-
+            
             // Ändrar namnet från Form1 till Podcasts
             this.Text = "Podcasts";
             episodeDescription.ReadOnly = true;
             CreateListOfPodcasts();
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
             DisplayCategories();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void podcastNew_Click(object sender, EventArgs e)
         {
-        }
+            string url = urlInput.Text;
+            string category = categorySelect.Text;
+            string updateFreq = updateFreqSelect.Text;
+            string name = podcastName.Text;
 
-        private void podcastNew_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(urlInput.Text))
-            {
-                if (Validation.IfCorrectURL(urlInput.Text))
-                {
-                    string selectedCategory = categorySelect.Text;
-
-                    if (!string.IsNullOrWhiteSpace(updateFreqSelect.Text) || !string.IsNullOrWhiteSpace(selectedCategory))
-                    {
-                        podcasts.Add(new Podcast(urlInput.Text, podcastName.Text, int.Parse(updateFreqSelect.Text), selectedCategory));
-                    }
-
-                    urlInput.Text = "";
-                    podcastName.Text = "";
-
-                    OtherSerializer serializer = new OtherSerializer();
-                    serializer.Serialize(podcasts);
-                    podcastList.Items.Clear();
-                    foreach (Podcast podcast in podcasts)
-                    {
-                        int numberOfEpisodes = podcast.NumberOfEpisodes;
-                        string name = podcast.Name;
-                        string category = podcast.Category;
-                        int freq = podcast.UpdateFreq;
-
-                        podcastList.Items.Add($"{numberOfEpisodes}, {name}, {freq}, {category}");
-                    }
-                }
-            }
-            DisplayPodcasts();
+            await lc.AddNewPodcast(url, category, updateFreq, name);
+            DisplayPodcasts(podcasts);
         }
 
         private void podcastSave_Click(object sender, EventArgs e)
         {
-            OtherSerializer serializer = new OtherSerializer();
-
-            if (urlInput.Text != null || podcastName != null || categorySelect.Text != null)
+            try
+            {
+                if (urlInput.Text != null || podcastName != null || !string.IsNullOrWhiteSpace(categorySelect.Text))
             {
                 selectedPodcast.Url = urlInput.Text;
                 selectedPodcast.Name = podcastName.Text;
                 selectedPodcast.UpdateFreq = int.Parse(updateFreqSelect.Text);
                 selectedPodcast.Category = categorySelect.Text;
+                lc.newSerialiazion(podcasts);
             }
-
-            serializer.Serialize(podcasts);
+            }
+            catch(Exception wrong)
+            {
+                Console.WriteLine(wrong.Message);
+            }
             podcastList.Items.Clear();
-            DisplayPodcasts();
+            categories.Items.Clear();
+            DisplayPodcasts(podcasts);
+            DisplayCategories();
         }
-
-        // Dessa metoder tillhör uppdatering av lista med titlar - Test för att se att den fungerar!
 
         private void episodeList_MouseClick(object sender, MouseEventArgs e)
         {
@@ -115,9 +96,8 @@ namespace AutomatedRSSReader
         private void podcastRemove_Click(object sender, EventArgs e)
         {
             podcasts.Remove(selectedPodcast);
-            OtherSerializer serializer = new OtherSerializer();
-            serializer.Serialize(podcasts);
-            DisplayPodcasts();
+            lc.newSerialiazion(podcasts);
+            DisplayPodcasts(podcasts);
         }
 
         protected void CreateListOfPodcasts()
@@ -127,12 +107,12 @@ namespace AutomatedRSSReader
 
             if (File.Exists(currentDir + filePath))
             {
-                OtherSerializer serializer = new OtherSerializer();
-                List<Podcast> podcastList = serializer.DeserializeList();
+
+                List<Podcast> podcastList = lc.GetAll();
 
                 podcasts.AddRange(podcastList);
 
-                DisplayPodcasts();
+                DisplayPodcasts(podcasts);
 
                 foreach (Podcast podcast in podcasts)
                 {
@@ -141,10 +121,10 @@ namespace AutomatedRSSReader
             }
         }
 
-        protected void DisplayPodcasts()
+        protected void DisplayPodcasts(List<Podcast> poddar)
         {
             podcastList.Items.Clear();
-            foreach (Podcast podcast in podcasts)
+            foreach (Podcast podcast in poddar)
             {
                 int numberOfEpisodes = podcast.NumberOfEpisodes;
                 string name = podcast.Name;
@@ -221,37 +201,41 @@ namespace AutomatedRSSReader
                 {
                     podcasts.RemoveAll(x => x.Category == selectedCat);
 
-                    OtherSerializer serializer = new OtherSerializer();
-                    serializer.Serialize(podcasts);
+                    lc.newSerialiazion(podcasts);
 
                     categoryList.Remove(selectedCat);
                     DisplayCategories();
-                    DisplayPodcasts();
+                    DisplayPodcasts(podcasts);
                 }
             }
         }
 
         private void categorySave_Click(object sender, EventArgs e)
         {
-            OtherSerializer serializer = new OtherSerializer();
-            string oldCatName = categories.SelectedItem.ToString();
-            string newCatName = categoryInput.Text;
+            try {
+                string oldCatName = categories.SelectedItem.ToString();
+                string newCatName = categoryInput.Text;
 
-            foreach (Podcast podcast in podcasts)
-            {
-                if (podcast.Category.Equals(oldCatName))
+                foreach (Podcast podcast in podcasts)
                 {
-                    podcast.Category = newCatName;
+                    if (podcast.Category.Equals(oldCatName))
+                    {
+                        podcast.Category = newCatName;
+                    }
                 }
             }
+            catch(Exception wrong1)
+            {
+                Console.WriteLine(wrong1.Message);
+            }
 
-            serializer.Serialize(podcasts);
+            lc.newSerialiazion(podcasts);
 
             categoryList.Clear();
             podcasts.Clear();
 
             CreateListOfPodcasts();
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
             DisplayCategories();
         }
 
@@ -281,7 +265,7 @@ namespace AutomatedRSSReader
 
         private void categories_Leave(object sender, EventArgs e)
         {
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -302,7 +286,7 @@ namespace AutomatedRSSReader
             podcasts.Clear();
 
             CreateListOfPodcasts();
-            DisplayPodcasts();
+            DisplayPodcasts(podcasts);
             DisplayCategories();
         }
 

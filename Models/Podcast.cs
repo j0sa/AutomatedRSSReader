@@ -1,16 +1,9 @@
-﻿using AutomatedRSSReader.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
 using System.ServiceModel.Syndication;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
 
-namespace AutomatedRSSReader
+namespace Models
 {
     [Serializable]
     public class Podcast : Entity, ITitleable
@@ -40,8 +33,6 @@ namespace AutomatedRSSReader
             Category = category;
             NumberOfEpisodes = 0;
             Name = name;
-            createTitleAndDescription();
-            createListOfEpisodes();
             NumberOfEpisodes = this.Episodes.Count;
             Update();
         }
@@ -50,7 +41,6 @@ namespace AutomatedRSSReader
         {
 
         }
-
         public bool NeedsUpdate
         {
             get
@@ -78,12 +68,12 @@ namespace AutomatedRSSReader
                 Description = feed.Description.Text;
                 Language = feed.Language;
                 LastUpdatedTime = feed.LastUpdatedTime.ToString();
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
         }
-
         public void createListOfEpisodes()
         {
             XmlReader reader = XmlReader.Create(Url);
