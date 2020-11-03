@@ -43,14 +43,14 @@ namespace AutomatedRSSReader
             DisplayCategories();
         }
 
-        private void podcastNew_Click(object sender, EventArgs e)
+        private async void podcastNew_Click(object sender, EventArgs e)
         {
             string url = urlInput.Text;
             string category = categorySelect.Text;
             string updateFreq = updateFreqSelect.Text;
             string name = podcastName.Text;
 
-            lc.AddNewPodcast(url, category, updateFreq, name);
+            await lc.AddNewPodcast(url, category, updateFreq, name);
             DisplayPodcasts(podcasts);
         }
 

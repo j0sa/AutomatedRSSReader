@@ -28,13 +28,13 @@ namespace Data
                 xmlSerializer.Serialize(outFile, podcastList);
             }
         }
-        public Podcast Deserialize()
+        public Podcast  Deserialize()
         {
             Podcast podcastObjToBeReturned;
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Podcast));
             using (FileStream inFile = new FileStream("PodcastData.xml", FileMode.Open, FileAccess.Read))
             {
-                podcastObjToBeReturned = (Podcast)xmlSerializer.Deserialize(inFile);
+               podcastObjToBeReturned = (Podcast)xmlSerializer.Deserialize(inFile);
             }
             return podcastObjToBeReturned;
         }

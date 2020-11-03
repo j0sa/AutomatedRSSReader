@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Models;
 using Data;
+using System.Threading.Tasks;
 
 namespace Business
 {
@@ -28,7 +29,7 @@ namespace Business
         }
 
 
-        public List<Podcast> AddNewPodcast(string url, string category, string updateFreq, string name)
+        public Task <List<Podcast>> AddNewPodcast(string url, string category, string updateFreq, string name)
         {
             if (!String.IsNullOrEmpty(url))
             {
@@ -43,7 +44,8 @@ namespace Business
                     OtherSerializer serializer = new OtherSerializer();
                     serializer.Serialize(podds);
                 }
-            } return podds;
+            } return Task.FromResult (podds);
         }
+        
     }
 }
