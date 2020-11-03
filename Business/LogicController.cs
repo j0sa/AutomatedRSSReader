@@ -8,7 +8,26 @@ namespace Business
 {
     public class LogicController
     {
-        public List<Podcast> podcasts = new List<Podcast>();
+        public List<Podcast> podds;
+        public LogicController()
+        {
+            podds = new List<Podcast>();
+            podds = GetAll();
+        }
+
+        public List<Podcast> GetAll()
+        {
+            OtherSerializer serializer = new OtherSerializer();
+            return serializer.DeserializeList();
+        }
+
+        public void newSerialiazion(List<Podcast> podcasts)
+        {
+            OtherSerializer serializer = new OtherSerializer();
+            serializer.Serialize(podcasts);
+        }
+
+
         public List<Podcast> AddNewPodcast(string url, string category, string updateFreq, string name)
         {
             if (!String.IsNullOrEmpty(url))
@@ -19,14 +38,12 @@ namespace Business
 
                     if (!string.IsNullOrWhiteSpace(updateFreq) || !string.IsNullOrWhiteSpace(selectedCategory))
                     {
-                        podcasts.Add(new Podcast(url, name, int.Parse(updateFreq), selectedCategory));
+                        podds.Add(new Podcast(url, name, int.Parse(updateFreq), selectedCategory));
                     }
-
                     OtherSerializer serializer = new OtherSerializer();
-                    serializer.Serialize(podcasts);
-                    
+                    serializer.Serialize(podds);
                 }
-            } return podcasts;
+            } return podds;
         }
     }
 }
